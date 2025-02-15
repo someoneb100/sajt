@@ -7,6 +7,7 @@ export const Nastava = () => {
 	const [activeSemester, setActiveSemester] = useState("letnji");
 	const [search, setSearch] = useState("");
 	const [kursevi, setKursevi] = useState(data.kursevi);
+	// eslint-disable-next-line no-unused-vars
 	const [tagoviFilter, setTagovi] = useState([]);
 	const [selectedTag, setSelectedTag] = useState("");
 	const [isOpen, setIsOpen] = useState(false);
