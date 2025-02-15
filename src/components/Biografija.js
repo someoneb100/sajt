@@ -13,7 +13,7 @@ export const Biografija = () => {
 					<div className="max-h-[420px] max-w-full md:max-w-[420px] rounded-lg overflow-hidden flex-shrink-0">
 						<img
 							src={Porfilna}
-							alt="Profile photo"
+							alt="Petar Đorđević"
 							className="object-cover w-full h-full"
 						/>
 					</div>
@@ -30,7 +30,7 @@ export const Biografija = () => {
 								download
 								rel="noopener noreferrer">
 								<button className="bg-white flex gap-x-2 border border-[#22A8C5] text-[#22A8C5] font-semibold text-sm px-4 py-2 rounded-lg shadow-md hover:bg-blue-50">
-									Преузми радну биографију <img src={Preuzmi} />
+									Преузми радну биографију <img src={Preuzmi} alt="cv" />
 								</button>
 							</a>
 						</div>

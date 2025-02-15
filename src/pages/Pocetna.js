@@ -40,7 +40,7 @@ function Pocetna() {
 				</div>
 				<div className="flex justify-center md:justify-end rounded-2xl order-1 md:order-2">
 					<img
-						src={Profilna}
+						src={Profilna} alt="Petar Đorđević"
 						className="w-full sm:h-[100%] l-h:[60%] xl:h-auto h-auto p-4 md:p-8 aspect-video rounded-[40px] object-cover"
 					/>
 				</div>

@@ -18,9 +18,9 @@ export const Radovi = () => {
 										<span className="text-sm text-gray-500">{rad.datum}</span>
 									</div>
 									<p className="text-gray-700">{rad.opis}</p>
-									<a href={rad.publicLink} target="_blank" download>
+									<a href={rad.publicLink} target="_blank" rel="noreferrer" download>
 										<button className="bg-white flex gap-x-2  border border-[#22A8C5] text-[#22A8C5] font-semibold text-sm px-4 py-2 rounded-lg shadow-md hover:bg-blue-50">
-											Преузми рад <img src={Preuzmi} />
+											Преузми рад <img src={Preuzmi} alt={rad.naslov}/>
 										</button>
 									</a>
 								</div>

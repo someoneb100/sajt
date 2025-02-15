@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import data from "../data/websiteData.json";
 import { vratiSadrzaj } from "../utils/VratiSadrzaj";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export const Nastava = () => {
 	const [activeSemester, setActiveSemester] = useState("letnji");

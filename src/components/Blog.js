@@ -31,11 +31,11 @@ export const Blog = () => {
 								<p className="text-sm text-gray-500 mb-3 sm:mb-0">
 									{blog.datum}
 								</p>
-								<a
+								<button
 									onClick={() => navigate(`/blog/${blog.id}`)}
 									className="text-[#22A8C5] text-sm sm:ml-auto font-medium hover:cursor-pointer hover:text-[#1B86A0]">
 									Видети више →
-								</a>
+								</button>
 							</div>
 						</div>
 					</div>

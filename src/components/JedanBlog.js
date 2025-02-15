@@ -1,12 +1,12 @@
 import { vratiSadrzaj } from "../utils/VratiSadrzaj";
-import { Title } from "./Title";
+// import { Title } from "./Title";
 import data from "../data/websiteData.json";
 import { useParams } from "react-router-dom";
 
 export const JedanBlog = () => {
 	const { id } = useParams();
 
-	const blog = data.blogovi.find((blog) => blog.id == id);
+	const blog = data.blogovi.find((blog) => blog.id === id);
 
 	return (
 		<div className="px-4 md:pl-[15%] md:pr-[15%] bg-[#F7F8F9] pb-12 w-full">
@@ -18,7 +18,7 @@ export const JedanBlog = () => {
 					<div className="max-w-full md:max-w-[420px] rounded-lg overflow-hidden flex-shrink-0">
 						<img
 							src={blog.slika}
-							alt="Profile photo"
+							alt={blog.naslov}
 							className="object-cover w-full h-full"
 						/>
 					</div>
