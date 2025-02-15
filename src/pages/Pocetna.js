@@ -18,7 +18,7 @@ function Pocetna() {
 					</div>
 					<div className="flex flex-col gap-y-5 pb-12">
 						<div className="text-base text-[#1e1818]">
-							<p>Проф. др. мр. Лорем Ипсум</p>
+							<p>Петар Ђорђевић</p>
 							<p>Катедра за рачунарство и информатику</p>
 						</div>
 						<div className="text-base text-[#8c8c8c]">
