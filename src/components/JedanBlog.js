@@ -1,13 +1,26 @@
 import { vratiSadrzaj } from "../utils/VratiSadrzaj";
-// import { Title } from "./Title";
-import data from "../data/websiteData.json";
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export const JedanBlog = () => {
 	const { id } = useParams();
+	const [blog, setBlog] = useState(null);
 
-	// eslint-disable-next-line eqeqeq
-	const blog = data.blogovi.find((blog) => blog.id == id);
+	useEffect(() => {
+		const loadBlog = () => {
+			// Dynamically load the specific blog post based on the id
+			const context = require.context('../data/blogovi', false, /\.json$/);
+			const blogData = context(`./${id}.json`); // Dynamically require the JSON file based on the id
+
+			setBlog(blogData); // Set the blog data state
+		};
+
+		loadBlog();
+	}, [id]);
+
+	if (!blog) {
+		return <div>Loading...</div>; // Show a loading state until the blog data is loaded
+	}
 
 	return (
 		<div className="px-4 md:pl-[15%] md:pr-[15%] bg-[#F7F8F9] pb-12 w-full">
