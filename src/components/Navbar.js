@@ -47,7 +47,7 @@ function Navbar() {
 					isOpen ? "flex flex-col items-center space-y-4" : "hidden"
 				} lg:flex lg:flex-row lg:items-center lg:space-x-8 lg:justify-center w-full`}>
 				{/* Logo aligned to the start */}
-				<a href="/" className="lg:flex-shrink-0">
+				<a href="http://www.matf.bg.ac.rs/" className="lg:flex-shrink-0">
 					<img src={Logo} className="h-10 w-auto" alt="Logo" />
 				</a>
 
