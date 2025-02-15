@@ -25,7 +25,7 @@ export const Biografija = () => {
 						</div>
 						<div className="mt-4 text-right flex justify-center md:justify-end">
 							<a
-								href="/Biografija.pdf"
+								href="/sajt/Petar_Djordjevic_CV.pdf"
 								target="_blank"
 								download
 								rel="noopener noreferrer">
