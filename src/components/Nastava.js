@@ -88,7 +88,7 @@ export const Nastava = () => {
 				</button>
 			</div>
 
-			<div className="flex space-x-4 mb-8">
+			{/* <div className="flex space-x-4 mb-8">
 				<div className="relative">
 					<input
 						type="text"
@@ -111,7 +111,7 @@ export const Nastava = () => {
 						<option>{tag}</option>
 					))}
 				</select>
-			</div>
+			</div> */}
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 				{kursevi !== undefined &&
 					kursevi[activeSemester].slice(0, 4).map((kurs, index) => (
