@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { HashRouter as Router, Routes, Route, useNavigate, HashRouter } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Layout from "./components/Layout";
 import Pocetna from "./pages/Pocetna";
 import { Biografija } from "./components/Biografija";
@@ -23,10 +23,31 @@ function RedirectHandler() {
 	return null;
 }
 
+function TitleUpdater() {
+	const location = useLocation();
+
+	useEffect(() => {
+		const titles = {
+			"/": "Почетна | Петар Ђорђевић - Математички факултет",
+			"/biografija": "Биографија | Петар Ђорђевић - Математички факултет",
+			"/nastava": "Настава | Петар Ђорђевић - Математички факултет",
+			"/obavestenja": "Обавештења | Петар Ђорђевић - Математички факултет",
+			"/radovi": "Радови | Петар Ђорђевић - Математички факултет",
+			"/blog": "Блог | Петар Ђорђевић - Математички факултет"
+		};
+
+		// Dohvati dinamički naslov ili postavi podrazumevani
+		document.title = titles[location.pathname] || "Петар Ђорђевић - Математички факултет";
+	}, [location]);
+
+	return null;
+}
+
 function App() {
 	return (
-		<HashRouter>
+		<Router>
 			<RedirectHandler />
+			<TitleUpdater />
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					<Route index element={<Pocetna />} />
@@ -38,7 +59,7 @@ function App() {
 					<Route path="blog/:id" element={<JedanBlog />} />
 				</Route>
 			</Routes>
-		</HashRouter>
+		</Router>
 	);
 }
 
