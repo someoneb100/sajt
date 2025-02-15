@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
+    <title>Преусмеравање...</title>
     <script>
-        // Redirect to index.html while preserving the path
+        // Dobavi trenutni putanju bez "/sajt"
         var pathname = window.location.pathname.replace(/^\/sajt/, "");
-        window.location.replace("/sajt/index.html?redirect=" + pathname);
+        
+        // Enkodovanje kako bi sprečili probleme sa specijalnim karakterima
+        var redirectUrl = "/sajt/index.html?redirect=" + encodeURIComponent(pathname);
+        
+        // Automatski preusmeri
+        window.location.replace(redirectUrl);
     </script>
 </head>
 <body>
-    <p>If you are not redirected, <a id="redirect-link" href="#">click here</a>.</p>
+    <p>Ако преусмеравање не ради, <a id="redirect-link" href="#">кликните овде</a>.</p>
     <script>
-        document.getElementById("redirect-link").href = "/sajt/index.html?redirect=" + pathname;
+        document.getElementById("redirect-link").href = redirectUrl;
     </script>
 </body>
 </html>
