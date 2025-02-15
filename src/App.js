@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useNavigate, HashRouter } from "react-router-dom";
 import Layout from "./components/Layout";
 import Pocetna from "./pages/Pocetna";
 import { Biografija } from "./components/Biografija";
@@ -25,7 +25,7 @@ function RedirectHandler() {
 
 function App() {
 	return (
-		<Router basename="/sajt">
+		<HashRouter>
 			<RedirectHandler />
 			<Routes>
 				<Route path="/" element={<Layout />}>
@@ -38,7 +38,7 @@ function App() {
 					<Route path="blog/:id" element={<JedanBlog />} />
 				</Route>
 			</Routes>
-		</Router>
+		</HashRouter>
 	);
 }
 

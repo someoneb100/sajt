@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 export const JedanBlog = () => {
 	const { id } = useParams();
 
-	const blog = data.blogovi.find((blog) => blog.id === id);
+	const blog = data.blogovi.find((blog) => blog.id == id);
 
 	return (
 		<div className="px-4 md:pl-[15%] md:pr-[15%] bg-[#F7F8F9] pb-12 w-full">
