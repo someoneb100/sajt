@@ -1,0 +1,1 @@
+export default "---\nlayout: page\nimage: 'https://miro.medium.com/v2/resize:fit:1400/0*SoqCeEz9EctJBXKw.png'\ntitle: Go jezik\ndate: 12.12.2024.\n---\n\nА јаа као **вуууук**, бежим од пастирааааа, а јаа као вууук, бежим од пастирааа аа а а ааааа аааа аа а аааааа";
