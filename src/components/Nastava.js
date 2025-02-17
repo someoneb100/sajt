@@ -1,15 +1,44 @@
 import React, { useEffect, useState } from "react";
-import data from "../data/websiteData.json";
 import { vratiSadrzaj } from "../utils/VratiSadrzaj";
 
 export const Nastava = () => {
 	const [activeSemester, setActiveSemester] = useState("letnji");
-	const [kursevi, setKursevi] = useState(data.kursevi);
+	const [kursevi, setKursevi] = useState({ letnji: [], zimski: [] });
 	const [isOpen, setIsOpen] = useState(false);
 
 	useEffect(() => {
-		setKursevi(data.kursevi);
-	}, [activeSemester]);
+		const loadLetnji = () => {
+			try {
+				const context = require.context(`../data/kursevi/letnji`, false, /\.json$/);
+				return context.keys().map((filePath) => {
+					const fileName = filePath.split('/').pop().replace('.json', '');
+					return { ...context(filePath), id: fileName };
+				});
+			} catch (error) {
+				console.error(`Greška pri učitavanju podataka za letnji:`, error);
+				return [];
+			}
+		};
+
+		const loadZimski = () => {
+			try {
+				const context = require.context(`../data/kursevi/zimski`, false, /\.json$/);
+				return context.keys().map((filePath) => {
+					const fileName = filePath.split('/').pop().replace('.json', '');
+					return { ...context(filePath), id: fileName };
+				});
+			} catch (error) {
+				console.error(`Greška pri učitavanju podataka za zimski:`, error);
+				return [];
+			}
+		};
+	
+		setKursevi({
+			letnji: loadLetnji(),
+			zimski: loadZimski(),
+		});
+	}, []);
+	
 
 	return (
 		<div className="pr-[15%] pl-[15%] bg-[#F7F8F9] h-[70%] pb-6">
