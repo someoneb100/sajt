@@ -1,5 +1,4 @@
-// src/pages/Home.js
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ContentCards from "../components/ContentCards";
 import data from "../data/websiteData.json";
 import Profilna from "../shared/profilnaSlika.png";
@@ -8,7 +7,66 @@ import { NavLink } from "react-router-dom";
 import { vratiSezonu } from "../utils/VratiSezonu";
 
 function Pocetna() {
-	const kursevi = data.kursevi[vratiSezonu()];
+	const [activeSemester, setActiveSemester] = useState("letnji");
+	const [sviKursevi, setKursevi] = useState({ letnji: [], zimski: [] });
+
+	useEffect(() => {
+		const initialSeason = vratiSezonu();
+		setActiveSemester(initialSeason);
+	}, []);
+
+	useEffect(() => {
+		const loadLetnji = () => {
+			try {
+				const context = require.context(`../data/kursevi/letnji`, false, /\.json$/);
+				return context.keys().map((filePath) => {
+					const fileName = filePath.split('/').pop().replace('.json', '');
+					return { ...context(filePath), id: fileName };
+				});
+			} catch (error) {
+				console.error(`Greška pri učitavanju podataka za letnji:`, error);
+				return [];
+			}
+		};
+
+		const loadZimski = () => {
+			try {
+				const context = require.context(`../data/kursevi/zimski`, false, /\.json$/);
+				return context.keys().map((filePath) => {
+					const fileName = filePath.split('/').pop().replace('.json', '');
+					return { ...context(filePath), id: fileName };
+				});
+			} catch (error) {
+				console.error(`Greška pri učitavanju podataka za zimski:`, error);
+				return [];
+			}
+		};
+	
+		setKursevi({
+			letnji: loadLetnji(),
+			zimski: loadZimski(),
+		});
+	}, []);
+
+	const kursevi = sviKursevi[activeSemester];
+
+	// Sigurno dobijanje poslednjeg kursa ili obavestenja
+	const getLastElement = (arr) => {
+		if (arr && arr.length > 0) {
+			return arr[arr.length - 1];
+		}
+		return null; // Vraća null ako nema elemenata
+	};
+
+	// Bezbedno uzimanje poslednjih kurseva i obaveštenja
+	const lastCourse = getLastElement(kursevi);
+	const secondLastCourse = kursevi.length > 1 ? kursevi[kursevi.length - 2] : null;
+	const thirdLastCourse = kursevi.length > 2 ? kursevi[kursevi.length - 3] : null;
+
+	const lastObavestenje = getLastElement(data.obavestenja);
+	const secondLastObavestenje = data.obavestenja.length > 1 ? data.obavestenja[data.obavestenja.length - 2] : null;
+	const thirdLastObavestenje = data.obavestenja.length > 2 ? data.obavestenja[data.obavestenja.length - 3] : null;
+
 	return (
 		<>
 			<div className="grid grid-cols-1 md:grid-cols-2 px-4 md:px-[15%] pt-16 bg-[#F7F8F9]">
@@ -27,14 +85,18 @@ function Pocetna() {
 						</div>
 						<div className="mt-20 flex flex-col gap-y-2">
 							<p className="text-base font-semibold">Последње новости</p>
-							<ContentCards
-								naslov={data.obavestenja[data.obavestenja.length - 1].naslov}
-								sadrzaj={data.obavestenja[data.obavestenja.length - 1].opis}
-								bg="bela"
-								btnText={"Види више →"}
-								btnBorder={false}
-								link={`${window.location.origin}/obavestenja`}
-							/>
+							{lastObavestenje ? (
+								<ContentCards
+									naslov={lastObavestenje.naslov}
+									sadrzaj={lastObavestenje.opis}
+									bg="bela"
+									btnText={"Види више →"}
+									btnBorder={false}
+									link={`${window.location.origin}/obavestenja`}
+								/>
+							) : (
+								<p>Нема обавештења</p>
+							)}
 						</div>
 					</div>
 				</div>
@@ -48,31 +110,39 @@ function Pocetna() {
 			<div className="bg-white pb-12 px-4 md:px-[15%]">
 				<Title content={"Курсеви"} />
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
-					<ContentCards
-						btnText={"Иди на курс →"}
-						bg="siva"
-						btnBorder
-						naslov={kursevi[kursevi.length - 1].naslov}
-						sadrzaj={kursevi[kursevi.length - 1].opis}
-						datum={kursevi[kursevi.length - 1].datum}
-					/>
+					{lastCourse ? (
+						<ContentCards
+							btnText={"Иди на курс →"}
+							bg="siva"
+							btnBorder
+							naslov={lastCourse.naslov}
+							sadrzaj={lastCourse.opis}
+							datum={lastCourse.datum}
+						/>
+					) : (
+						<p>Нема курсева</p>
+					)}
 					<div className="flex flex-col gap-y-6">
-						<ContentCards
-							btnText={"Иди на курс →"}
-							bg="siva"
-							btnBorder
-							naslov={kursevi[kursevi.length - 2].naslov}
-							sadrzaj={kursevi[kursevi.length - 2].opis}
-							datum={kursevi[kursevi.length - 2].datum}
-						/>
-						<ContentCards
-							btnText={"Иди на курс →"}
-							bg="siva"
-							btnBorder
-							naslov={kursevi[kursevi.length - 3].naslov}
-							sadrzaj={kursevi[kursevi.length - 3].opis}
-							datum={kursevi[kursevi.length - 3].datum}
-						/>
+						{secondLastCourse && (
+							<ContentCards
+								btnText={"Иди на курс →"}
+								bg="siva"
+								btnBorder
+								naslov={secondLastCourse.naslov}
+								sadrzaj={secondLastCourse.opis}
+								datum={secondLastCourse.datum}
+							/>
+						)}
+						{thirdLastCourse && (
+							<ContentCards
+								btnText={"Иди на курс →"}
+								bg="siva"
+								btnBorder
+								naslov={thirdLastCourse.naslov}
+								sadrzaj={thirdLastCourse.opis}
+								datum={thirdLastCourse.datum}
+							/>
+						)}
 					</div>
 				</div>
 			</div>
@@ -86,33 +156,39 @@ function Pocetna() {
 					</NavLink>
 				</div>
 				<div className="flex flex-col gap-y-6">
-					<ContentCards
-						btnText={"Види више →"}
-						btnColorRed
-						datum={data.obavestenja[data.obavestenja.length - 1].datum}
-						naslov={data.obavestenja[data.obavestenja.length - 1].naslov}
-						sadrzaj={data.obavestenja[data.obavestenja.length - 1].opis}
-						bg="bela"
-						link={`/obavestenja`}
-					/>
-					<ContentCards
-						btnText={"Види више →"}
-						btnColorRed
-						datum={data.obavestenja[data.obavestenja.length - 2].datum}
-						naslov={data.obavestenja[data.obavestenja.length - 2].naslov}
-						sadrzaj={data.obavestenja[data.obavestenja.length - 2].opis}
-						bg="bela"
-						link={`/obavestenja`}
-					/>
-					<ContentCards
-						btnText={"Види више →"}
-						btnColorRed
-						datum={data.obavestenja[data.obavestenja.length - 3].datum}
-						naslov={data.obavestenja[data.obavestenja.length - 3].naslov}
-						sadrzaj={data.obavestenja[data.obavestenja.length - 3].opis}
-						bg="bela"
-						link={`/obavestenja`}
-					/>
+					{lastObavestenje && (
+						<ContentCards
+							btnText={"Види више →"}
+							btnColorRed
+							datum={lastObavestenje.datum}
+							naslov={lastObavestenje.naslov}
+							sadrzaj={lastObavestenje.opis}
+							bg="bela"
+							link={`/obavestenja`}
+						/>
+					)}
+					{secondLastObavestenje && (
+						<ContentCards
+							btnText={"Види више →"}
+							btnColorRed
+							datum={secondLastObavestenje.datum}
+							naslov={secondLastObavestenje.naslov}
+							sadrzaj={secondLastObavestenje.opis}
+							bg="bela"
+							link={`/obavestenja`}
+						/>
+					)}
+					{thirdLastObavestenje && (
+						<ContentCards
+							btnText={"Види више →"}
+							btnColorRed
+							datum={thirdLastObavestenje.datum}
+							naslov={thirdLastObavestenje.naslov}
+							sadrzaj={thirdLastObavestenje.opis}
+							bg="bela"
+							link={`/obavestenja`}
+						/>
+					)}
 				</div>
 			</div>
 		</>
