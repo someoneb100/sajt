@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { vratiSadrzaj } from "../utils/VratiSadrzaj";
+import { vratiSezonu } from "../utils/VratiSezonu";
 
 export const Nastava = () => {
 	const [activeSemester, setActiveSemester] = useState("letnji");
 	const [kursevi, setKursevi] = useState({ letnji: [], zimski: [] });
 	const [isOpen, setIsOpen] = useState(false);
+
+	useEffect(() => {
+		const initialSeason = vratiSezonu();
+		setActiveSemester(initialSeason);
+	}, []);
 
 	useEffect(() => {
 		const loadLetnji = () => {
