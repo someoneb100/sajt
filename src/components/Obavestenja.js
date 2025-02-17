@@ -18,7 +18,11 @@ export const Obavestenja = () => {
 
 				// Add the 'id' property dynamically based on the file name
 				return { ...data, id: fileName };
-			}).sort((a, b) => {
+			}).filter((item) => {
+				const currentDate = new Date(); // Get the current date and time
+				const itemDate = new Date(item.datum); // Convert 'datum' to Date object for comparison
+				return itemDate <= currentDate; // Keep only items with 'datum' <= current date
+			  }).sort((a, b) => {
 				const dateA = new Date(a.datum); // Convert 'datum' to Date object for comparison
 				const dateB = new Date(b.datum); // Convert 'datum' to Date object for comparison
 
