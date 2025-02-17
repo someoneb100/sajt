@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { vratiSadrzaj } from "../utils/VratiSadrzaj";
 import { vratiSezonu } from "../utils/VratiSezonu";
+import { Title } from "./Title";
 
 export const Nastava = () => {
 	const [activeSemester, setActiveSemester] = useState("letnji");
@@ -48,9 +49,7 @@ export const Nastava = () => {
 
 	return (
 		<div className="pr-[15%] pl-[15%] bg-[#F7F8F9] h-[70%] pb-6">
-			<header className="mb-8">
-				<h1 className="text-4xl font-bold text-red-600">Настава</h1>
-			</header>
+			<Title content={"Настава"} />
 
 			<div className="inline-flex gap-x-2 p-1 mb-2 items-center border border-gray-300 rounded-md overflow-hidden">
 				<button
