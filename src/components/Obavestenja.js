@@ -51,8 +51,7 @@ export const Obavestenja = () => {
     ...new Set(obavestenja.flatMap((obavestenje) => obavestenje.tagovi)),
   ].sort();
 
-  const handleTagChange = (e) => {
-    const tag = e.target.value;
+  const handleTagChange = (tag) => {
     setSelectedTag(tag);
     // Update the URL query parameter when the tag is changed
     navigate({
@@ -65,7 +64,7 @@ export const Obavestenja = () => {
     <div className="pl-[15%] pr-[15%] bg-[#F7F8F9] pb-12 w-full">
       <Title content={"Обавештења"} />
       <select
-        onChange={handleTagChange}
+        onChange={(e) => handleTagChange(e.target.value)}
         value={selectedTag}
         className="border border-gray-300 rounded-md py-2 px-4 bg-white focus:outline-none min-w-[150px]"
       >
@@ -85,7 +84,7 @@ export const Obavestenja = () => {
             (obavestenje) =>
               selectedTag === "" || obavestenje.tagovi.includes(selectedTag)
           )
-          .map((obavestenje, index) => (
+          .map((obavestenje) => (
             <div key={obavestenje.id} className="bg-white rounded-2xl mb-4 p-6">
               <div className="flex">
                 <h3 className="text-[#C52233] text-base font-bold mb-2">
@@ -100,9 +99,13 @@ export const Obavestenja = () => {
               <div>
                 {obavestenje.tagovi.length > 0 &&
                   obavestenje.tagovi.map((tag) => (
-                    <span key={tag} className="bg-gray-200 text-gray-600 text-xs py-1 px-3 rounded-full mr-2">
+                    <button
+                      key={tag}
+                      onClick={() => handleTagChange(tag)}
+                      className="bg-gray-200 text-gray-600 text-xs py-1 px-3 rounded-full mr-2 hover:bg-gray-300"
+                    >
                       {tag}
-                    </span>
+                    </button>
                   ))}
                 <p className="text-gray-600 mb-2 leading-relaxed mb-6">
                   {vratiSadrzaj({ content: obavestenje.opis })}
