@@ -39,21 +39,5 @@
 			"datum": "16:15 12.12.2012.",
 			"tagovi": ["novost", "4"]
 		}
-	],
-	"radovi": [
-		{
-			"id": 0,
-			"opis": "Рад на тему “Ој багреме, е мој багреме",
-			"datum": "16:15 12.12.2012.",
-			"publicLink": "/sajt/Biografija.pdf",
-			"naslov": "naslov rada"
-		},
-		{
-			"id": 1,
-			"opis": "Рад на тему “Ој багреме, е мој багреме",
-			"datum": "16:15 12.12.2012.",
-			"publicLink": "/Rad1.pdf",
-			"naslov": "naslov rada"
-		}
 	]
 }
