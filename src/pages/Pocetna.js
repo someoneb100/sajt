@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ContentCards from "../components/ContentCards";
-import data from "../data/websiteData.json";
 import Profilna from "../shared/profilnaSlika.png";
 import { Title } from "../components/Title";
 import { NavLink } from "react-router-dom";
@@ -13,6 +12,34 @@ function Pocetna() {
 	useEffect(() => {
 		const initialSeason = vratiSezonu();
 		setActiveSemester(initialSeason);
+	}, []);
+
+	const [obavestenja, setObavestenja] = useState([]);
+		
+	useEffect(() => {
+		const loadObavestenja= () => {
+			// Using Webpack's require.context to dynamically import all .json files from the folder
+			const context = require.context('../data/obavestenja', false, /\.json$/); // Adjust the path accordingly
+			const blogFiles = context.keys(); // This will return an array of file paths
+
+			// Dynamically require each JSON file
+			const data = blogFiles.map((filePath) => {
+				const fileName = filePath.split('/').pop().replace('.json', '');
+				const data = context(filePath); // Load the JSON data from the file
+
+				// Add the 'id' property dynamically based on the file name
+				return { ...data, id: fileName };
+			}).sort((a, b) => {
+				const dateA = new Date(a.datum); // Convert 'datum' to Date object for comparison
+				const dateB = new Date(b.datum); // Convert 'datum' to Date object for comparison
+
+				return dateB - dateA; // Sorting in descending order (latest first)
+			});
+
+			setObavestenja(data); // Update state with the imported JSON files
+		};
+
+		loadObavestenja();
 	}, []);
 
 	useEffect(() => {
@@ -63,9 +90,9 @@ function Pocetna() {
 	const secondLastCourse = kursevi.length > 1 ? kursevi[kursevi.length - 2] : null;
 	const thirdLastCourse = kursevi.length > 2 ? kursevi[kursevi.length - 3] : null;
 
-	const lastObavestenje = getLastElement(data.obavestenja);
-	const secondLastObavestenje = data.obavestenja.length > 1 ? data.obavestenja[data.obavestenja.length - 2] : null;
-	const thirdLastObavestenje = data.obavestenja.length > 2 ? data.obavestenja[data.obavestenja.length - 3] : null;
+	const lastObavestenje = getLastElement(obavestenja);
+	const secondLastObavestenje = obavestenja.length > 1 ? obavestenja[obavestenja.length - 2] : null;
+	const thirdLastObavestenje = obavestenja.length > 2 ? obavestenja[obavestenja.length - 3] : null;
 
 	return (
 		<>
