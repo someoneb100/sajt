@@ -34,8 +34,9 @@ export const Obavestenja = () => {
 	const [selectedTag, setSelectedTag] = useState("");
 	const tagoviFilter = [
 		...new Set(obavestenja.flatMap((obavestenje) => obavestenje.tagovi)),
-	];
+	].sort();
 
+	
 	return (
 		<div className="pl-[15%] pr-[15%] bg-[#F7F8F9] pb-12 w-full">
 			<Title content={"Обавештења"} />
