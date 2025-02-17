@@ -66,7 +66,7 @@ export const Nastava = () => {
               : "text-gray-500 border border-gray-200"
           }`}
         >
-          Летњи семестар
+          Летњи
         </button>
         <div className="w-px h-6 bg-gray-300"></div>
         <button
@@ -77,7 +77,7 @@ export const Nastava = () => {
               : "text-gray-500 border border-gray-200"
           }`}
         >
-          Зимски семестар
+          Зимски
         </button>
       </div>
 
