@@ -1,6 +1,6 @@
 import { vratiSadrzaj } from "../utils/VratiSadrzaj";
 import { Title } from "./Title";
-import data from "../data/websiteData.json";
+import biografija from "../data/biografija.json";
 import Preuzmi from "../shared/Preuzmi.png";
 import Porfilna from "../shared/profilnaSlika.png";
 
@@ -20,7 +20,7 @@ export const Biografija = () => {
 					<div className="flex flex-col">
 						<div className="flex-1">
 							<p className="text-gray-700 text-sm md:text-base">
-								{vratiSadrzaj({ content: data.biografija })}
+								{vratiSadrzaj({ content: biografija })}
 							</p>
 						</div>
 						<div className="mt-4 text-right flex justify-center md:justify-end">
