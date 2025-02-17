@@ -13,11 +13,16 @@ export const Obavestenja = () => {
 
 			// Dynamically require each JSON file
 			const data = blogFiles.map((filePath) => {
-			const fileName = filePath.split('/').pop().replace('.json', '');
-			const data = context(filePath); // Load the JSON data from the file
+				const fileName = filePath.split('/').pop().replace('.json', '');
+				const data = context(filePath); // Load the JSON data from the file
 
-			// Add the 'id' property dynamically based on the file name
-			return { ...data, id: fileName };
+				// Add the 'id' property dynamically based on the file name
+				return { ...data, id: fileName };
+			}).sort((a, b) => {
+				const dateA = new Date(a.datum); // Convert 'datum' to Date object for comparison
+				const dateB = new Date(b.datum); // Convert 'datum' to Date object for comparison
+
+				return dateB - dateA; // Sorting in descending order (latest first)
 			});
 
 			setObavestenja(data); // Update state with the imported JSON files
@@ -31,7 +36,6 @@ export const Obavestenja = () => {
 		...new Set(obavestenja.flatMap((obavestenje) => obavestenje.tagovi)),
 	];
 
-	console.log(selectedTag);
 	return (
 		<div className="pl-[15%] pr-[15%] bg-[#F7F8F9] pb-12 w-full">
 			<Title content={"Обавештења"} />
