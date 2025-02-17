@@ -1,12 +1,34 @@
 import { Title } from "./Title";
-import data from "../data/websiteData.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { vratiSadrzaj } from "../utils/VratiSadrzaj";
 
 export const Obavestenja = () => {
+	const [obavestenja, setObavestenja] = useState([]);
+		
+	useEffect(() => {
+		const loadObavestenja= () => {
+			// Using Webpack's require.context to dynamically import all .json files from the folder
+			const context = require.context('../data/obavestenja', false, /\.json$/); // Adjust the path accordingly
+			const blogFiles = context.keys(); // This will return an array of file paths
+
+			// Dynamically require each JSON file
+			const data = blogFiles.map((filePath) => {
+			const fileName = filePath.split('/').pop().replace('.json', '');
+			const data = context(filePath); // Load the JSON data from the file
+
+			// Add the 'id' property dynamically based on the file name
+			return { ...data, id: fileName };
+			});
+
+			setObavestenja(data); // Update state with the imported JSON files
+		};
+
+		loadObavestenja();
+	}, []);
+
 	const [selectedTag, setSelectedTag] = useState("");
 	const tagoviFilter = [
-		...new Set(data.obavestenja.flatMap((obavestenje) => obavestenje.tagovi)),
+		...new Set(obavestenja.flatMap((obavestenje) => obavestenje.tagovi)),
 	];
 
 	console.log(selectedTag);
@@ -25,7 +47,7 @@ export const Obavestenja = () => {
 			</select>
 
 			<div className="mt-4">
-				{data.obavestenja
+				{obavestenja
 					.filter(
 						(obavestenje) =>
 							selectedTag === "" || obavestenje.tagovi.includes(selectedTag)
