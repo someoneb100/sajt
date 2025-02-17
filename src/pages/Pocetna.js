@@ -33,7 +33,7 @@ function Pocetna() {
 				const dateA = new Date(a.datum); // Convert 'datum' to Date object for comparison
 				const dateB = new Date(b.datum); // Convert 'datum' to Date object for comparison
 
-				return dateB - dateA; // Sorting in descending order (latest first)
+				return dateA - dateB; // Sorting in ascending order (latest last)
 			});
 
 			setObavestenja(data); // Update state with the imported JSON files
