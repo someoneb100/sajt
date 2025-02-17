@@ -1,13 +1,13 @@
 // src/components/Footer.js
 import React from "react";
 import { Title } from "./Title";
-import data from "../data/websiteData.json";
+import kontakt from "../data/kontakt.json";
 
 function Footer() {
 	return (
 		<footer className="bg-white text-white text-left px-[15%] py-12">
 			<Title content={"Контакт информације"} />
-			{data.kontakt.map((kontakt) => {
+			{kontakt.map((kontakt) => {
 				return (
 					<div className="mb-6">
 						<p className="text-base text-[#1E1818] mb-2">{kontakt.key}</p>
