@@ -7,10 +7,9 @@
     <script>
         // Dobavi trenutni putanju bez "/sajt"
         var pathname = window.location.pathname.replace(/^\/sajt/, "");
-        console.log(pathname)
         
         // Enkodovanje kako bi sprečili probleme sa specijalnim karakterima
-        var redirectUrl = "/sajt/#" + encodeURIComponent(pathname);
+        var redirectUrl = "/sajt/index.html?redirect=" + encodeURIComponent(pathname);
         
         // Automatski preusmeri
         window.location.replace(redirectUrl);
