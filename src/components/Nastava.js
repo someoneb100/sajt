@@ -47,7 +47,7 @@ export const Nastava = () => {
 						<h2 className="text-red-600 font-semibold text-lg mb-2">
 							{kurs.naslov}
 						</h2>
-						<p className="text-sm text-gray-500 mb-4">16:15 12.12.2012.</p>
+						<p className="text-sm text-gray-500 mb-4">{kurs.datum}</p>
 						<p className="text-gray-700 text-sm mb-4 line-clamp-[7] overflow-hidden text-ellipsis">
 							{vratiSadrzaj({ content: kurs.opis })}
 						</p>
