@@ -12,7 +12,7 @@ export const Obavestenja = () => {
 	console.log(selectedTag);
 	return (
 		<div className="pl-[15%] pr-[15%] bg-[#F7F8F9] pb-12 w-full">
-			<Title content={"Биографија"} />
+			<Title content={"Обавештења"} />
 			<select
 				onChange={(e) => setSelectedTag(e.target.value)}
 				className="border border-gray-300 rounded-md py-2 px-4 bg-white focus:outline-none min-w-[150px]">
