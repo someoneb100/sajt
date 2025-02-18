@@ -81,8 +81,8 @@ export const Nastava = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {kursevi[activeSemester].slice(0, 4).map((kurs, index) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {kursevi[activeSemester].slice(0, 3).map((kurs, index) => (
           <div key={index} className="bg-white rounded-lg shadow p-6">
             <h2 className="text-red-600 font-semibold text-lg mb-2">
               {kurs.naslov}
@@ -112,7 +112,7 @@ export const Nastava = () => {
         ))}
 
         {isOpen &&
-          kursevi[activeSemester].slice(4).map((kurs, index) => (
+          kursevi[activeSemester].slice(3).map((kurs, index) => (
             <div key={`extra-${index}`} className="bg-white rounded-lg shadow p-6">
               <h2 className="text-red-600 font-semibold text-lg mb-2">
                 {kurs.naslov}
