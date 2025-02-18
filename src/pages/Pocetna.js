@@ -100,8 +100,8 @@ function Pocetna() {
 
 	return (
 		<>
-			<div className="grid grid-cols-1 md:grid-cols-2 px-4 md:px-[15%] pt-16 bg-[#F7F8F9]">
-				<div className="order-2 md:order-1">
+			<div className="grid grid-cols-1 2xl:grid-cols-3 px-4 md:px-[15%] pt-16 bg-[#F7F8F9]">
+				<div className="order-2 2xl:order-1 2xl:col-span-2">
 					<div className="m-0 bg-[#F7F8F9]">
 						<Title content={"Добродошли!"} />
 					</div>
@@ -131,13 +131,14 @@ function Pocetna() {
 						</div>
 					</div>
 				</div>
-				<div className="flex justify-center md:justify-end rounded-2xl order-1 md:order-2">
+				<div className="hidden 2xl:flex justify-center 2xl:justify-end rounded-2xl order-1 2xl:order-2 2xl:col-span-1">
 					<img
 						src={Profilna} alt="Petar Đorđević"
-						className="w-full sm:h-[100%] l-h:[60%] xl:h-auto h-auto p-4 md:p-8 aspect-video rounded-[40px] object-cover"
+						className="w-full sm:h-[100%] 2xl:h-auto h-auto p-4 2xl:p-8 aspect-video rounded-[40px] object-cover"
 					/>
 				</div>
 			</div>
+
 			<div className="bg-white pb-12 px-4 md:px-[15%]">
 				<Title content={"Курсеви"} />
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
