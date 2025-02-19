@@ -22,7 +22,7 @@ export const JedanBlog = () => {
 	}, [id]);
 
 	if (!blog) {
-		return <div>Loading...</div>;
+		return <div className="px-4 md:pl-[15%] md:pr-[15%] bg-[#F7F8F9] pb-12 w-full"></div>;
 	}
 
 	return (
