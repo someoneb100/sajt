@@ -1,6 +1,6 @@
-import { vratiSadrzaj } from "../utils/VratiSadrzaj";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { SinglePage } from "./SinglePage";
 
 export const JedanBlog = () => {
 	const { id } = useParams();
@@ -13,29 +13,15 @@ export const JedanBlog = () => {
 	}, [id]);
 
 	if (!blog) {
-		return <div>Loading...</div>;
-	}
+        return <div>Loading...</div>;
+    }
 
 	return (
-		<div className="px-4 md:pl-[15%] md:pr-[15%] bg-[#F7F8F9] pb-12 w-full">
-			<h1 className="text-[#c52233] font-semibold text-3xl md:text-5xl leading-[36px] md:leading-[56px] pb-6">
-				{blog.naslov}
-			</h1>
-			<div className="mx-auto bg-white shadow-lg rounded-lg p-4">
-				<div className="relative">
-					<img
-						src={blog.slika}
-						alt={blog.naslov}
-						className="w-[160px] md:w-[250px] rounded-lg float-left mr-4 mb-2"
-					/>
-					<p className="text-gray-700 text-sm md:text-base">
-						{vratiSadrzaj({ content: blog.opis })}
-					</p>
-					{/* Invisible spacer to maintain the height of the container */}
-					<div className="clear-both h-0" />
-				</div>
-			</div>
-		</div>
-
-	);
+		<SinglePage
+			title={blog.naslov}
+			image={{href: blog.slika, alt: blog.naslov}}
+			content={blog.opis}
+			download={null}
+		/>
+	)
 };
