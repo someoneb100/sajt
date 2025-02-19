@@ -1,6 +1,6 @@
 import { Title } from "./Title";
 import { DownloadButton } from "./Buttons";
-import { vratiSadrzaj } from "../utils/VratiSadrzaj";
+import { MarkdownRenderer } from "./MarkdownRenderer";
 
 export const SinglePage = ({ 
     title, 
@@ -18,9 +18,7 @@ export const SinglePage = ({
 						alt={image.alt}
 						className="w-[160px] md:w-[250px] rounded-lg float-left mr-4 mb-2"
 					/>}
-					<p className="text-gray-700 text-sm md:text-base">
-						{vratiSadrzaj({ content: content })}
-					</p>
+					<MarkdownRenderer content={content} />
                     <div className="clear-both h-0" />
 				</div>
 				<div className="mt-4 text-right flex justify-center md:justify-end">
