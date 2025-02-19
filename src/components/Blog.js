@@ -18,7 +18,16 @@ export const Blog = () => {
 
         // Add the 'id' property dynamically based on the file name
         return { ...blogData, id: fileName };
-      });
+      }).filter((item) => {
+        const currentDate = new Date();
+        const itemDate = new Date(item.datum);
+        return itemDate <= currentDate;
+      })
+      .sort((a, b) => {
+        const dateA = new Date(a.datum);
+        const dateB = new Date(b.datum);
+        return dateB - dateA;
+      });;
 
       setBlogs(blogsData); // Update state with the imported JSON files
     };
