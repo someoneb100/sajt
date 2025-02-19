@@ -89,12 +89,7 @@ export const Nastava = () => {
                   <Tag key={tag} text={tag} />
                 ))}
               </div>
-              <a
-                href={kurs.link}
-                className="inline-block text-[#22A8C5] border border-[#22A8C5] hover:bg-blue-50 py-2 px-4 rounded-md text-sm font-semibold"
-              >
-                Иди на курс →
-              </a>
+              <MoreButton href={kurs.link} text="Иди на курс" />
             </div>
           ))}
       </div>
