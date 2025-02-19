@@ -10,7 +10,6 @@ import { MoreButton } from "./Buttons";
 function ContentCards({
 	naslov,
 	sadrzaj,
-	btnBorder = false,
 	bg = "white",
 	btnText,
 	datum,
