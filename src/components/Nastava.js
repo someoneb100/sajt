@@ -25,8 +25,6 @@ export const Nastava = () => {
     });
   }, []);
 
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <div className="pr-[15%] pl-[15%] bg-[#F7F8F9] h-[70%] pb-6">
       <Title content={"Настава"} />
@@ -56,7 +54,7 @@ export const Nastava = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {kursevi[activeSemester].slice(0, 3).map((kurs, index) => (
+        {kursevi[activeSemester].map((kurs, index) => (
           <div key={index} className="bg-white rounded-lg shadow p-6">
             <h2 className="text-red-600 font-semibold text-lg mb-2">
               {kurs.naslov}
@@ -73,37 +71,7 @@ export const Nastava = () => {
             <MoreButton href={kurs.link} text="Иди на курс" />
           </div>
         ))}
-
-        {isOpen &&
-          kursevi[activeSemester].slice(3).map((kurs, index) => (
-            <div key={`extra-${index}`} className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-red-600 font-semibold text-lg mb-2">
-                {kurs.naslov}
-              </h2>
-              <p className="text-sm text-gray-500 mb-4">16:15 12.12.2012.</p>
-              <p className="text-gray-700 text-sm mb-4 line-clamp-[7] overflow-hidden text-ellipsis">
-                {vratiSadrzaj({ content: kurs.opis })}
-              </p>
-              <div className="flex space-x-2 mb-4">
-                {kurs.tagovi.map((tag) => (
-                  <Tag key={tag} text={tag} />
-                ))}
-              </div>
-              <MoreButton href={kurs.link} text="Иди на курс" />
-            </div>
-          ))}
       </div>
-
-      {kursevi[activeSemester].length > 3 && !isOpen && (
-        <div className="flex justify-center mt-8">
-          <button
-            onClick={() => setIsOpen(true)}
-            className="text-red-600 border border-red-600 py-2 px-6 rounded-md"
-          >
-            Старије →
-          </button>
-        </div>
-      )}
     </div>
   );
 };
