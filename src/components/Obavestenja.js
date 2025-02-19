@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Title } from "./Title";
-import { vratiSadrzaj } from "../utils/VratiSadrzaj";
+import { MarkdownRenderer } from "./MarkdownRenderer";
 import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
 import { MoreButton, Tag } from "./Buttons";
 
@@ -10,10 +10,18 @@ export const Obavestenja = () => {
   const [selectedTag, setSelectedTag] = useState("");
 
   useEffect(() => {
-    const context = require.context("../data/obavestenja", false, /\.json$/);
-    const data = dohvatiSadrzaj(context, true);
-    setObavestenja(data);
+    const fetchObavestenja = async () => {
+      try {
+        const context = require.context("../data/obavestenja", false, /\.md$/);
+        const data = await dohvatiSadrzaj(context, true, true);
+        setObavestenja(data);
+      } catch (error) {
+        console.error("Greška pri učitavanju obaveštenja:", error);
+      }
+    };
+    fetchObavestenja();
   }, []);
+
 
   const location = useLocation();
 
@@ -66,14 +74,16 @@ export const Obavestenja = () => {
                 )}
               </div>
               <div>
-                {obavestenje.tagovi.length > 0 &&
+                  <div className="text-gray-600 mb-2 leading-relaxed mb-2">
+                  <MarkdownRenderer content={obavestenje.content} className="text-gray-600 mb-2 leading-relaxed mb-6"/>
+                  </div>
+                  <div className="text-gray-600 mb-4 leading-relaxed mb-6">
+                  {obavestenje.tagovi.length > 0 &&
                   obavestenje.tagovi.map((tag) => (
                     <Tag key={tag} text={tag} />
                   ))}
-                <p className="text-gray-600 mb-2 leading-relaxed mb-6">
-                  {vratiSadrzaj({ content: obavestenje.opis })}
-                </p>
-                <MoreButton href={`/sajt/#/obavestenja/${obavestenje.id}`} />
+                  </div>
+                <MoreButton href={`/sajt/#/obavestenja/${obavestenje.id}`} className="block mt-4" />
               </div>
             </div>
           ))}
