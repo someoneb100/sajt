@@ -36,7 +36,7 @@ export const Blog = () => {
                 <p className="text-sm text-gray-500 mb-3 sm:mb-0">
                   {blog.datum}
                 </p>
-                <MoreButton href={`/blog/${blog.id}`} />
+                <MoreButton href={`/sajt/#/blog/${blog.id}`} />
               </div>
             </div>
           </div>
