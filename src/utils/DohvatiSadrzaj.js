@@ -17,7 +17,7 @@ export async function dohvatiSadrzaj(context, sortDate = false, desc = true, ext
             return { ...data, content: content, id: name };
         })
     );
-    console.log(data)
+    
     if (!sortDate) {
         return data;
     }

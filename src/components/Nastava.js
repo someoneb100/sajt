@@ -7,22 +7,28 @@ import { MoreButton, Tag } from "./Buttons";
 
 export const Nastava = () => {
   const [activeSemester, setActiveSemester] = useState("letnji");
-
-  useEffect(() => {
-    const initialSeason = vratiSezonu();
-    setActiveSemester(initialSeason);
-  }, []);
-
   const [kursevi, setKursevi] = useState({ letnji: [], zimski: [] });
 
   useEffect(() => {
-    const contextLetnji = require.context(`../data/kursevi/letnji`, false, /\.json$/);
-    const contextZimski = require.context(`../data/kursevi/zimski`, false, /\.json$/);
+    setActiveSemester(vratiSezonu());
+  }, []);
 
-    setKursevi({
-      letnji: dohvatiSadrzaj(contextLetnji),
-      zimski: dohvatiSadrzaj(contextZimski),
-    });
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const letnjiContext = require.context(`../data/kursevi/letnji`, false, /\.md$/);
+        const zimskiContext = require.context(`../data/kursevi/zimski`, false, /\.md$/);
+
+        const letnji = await dohvatiSadrzaj(letnjiContext);
+        const zimski = await dohvatiSadrzaj(zimskiContext);
+        console.log(letnji)
+        setKursevi({ letnji: letnji, zimski: zimski });
+      } catch (error) {
+        console.error("Greška pri učitavanju kurseva:", error);
+      }
+    };
+
+    fetchCourses();
   }, []);
 
   return (
@@ -56,21 +62,20 @@ export const Nastava = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {kursevi[activeSemester].map((kurs, index) => (
           <div key={index} className="bg-white rounded-lg shadow p-6 flex flex-col">
-          <h2 className="text-red-600 font-semibold text-lg mb-2">
-            {kurs.naslov}
-          </h2>
-          <p className="text-sm text-gray-500 mb-4">{kurs.datum}</p>
-          <p className="text-gray-700 text-sm mb-4 line-clamp-[7] overflow-hidden text-ellipsis">
-            {vratiSadrzaj({ content: kurs.opis })}
-          </p>
-          <div className="flex space-x-2 mb-4">
-            {kurs.tagovi.map((tag) => (
-              <Tag key={tag} text={tag} />
-            ))}
+            <h2 className="text-red-600 font-semibold text-lg mb-2">
+              {kurs.naslov}
+            </h2>
+            <p className="text-sm text-gray-500 mb-4">{kurs.datum}</p>
+            <p className="text-gray-700 text-sm mb-4 line-clamp-[7] overflow-hidden text-ellipsis">
+              {vratiSadrzaj({ content: kurs.opis })}
+            </p>
+            <div className="flex space-x-2 mb-4">
+              {kurs.tagovi?.map((tag) => (
+                <Tag key={tag} text={tag} />
+              ))}
+            </div>
+            <MoreButton href={kurs.link} text="Иди на курс" className="mt-auto" />
           </div>
-          <MoreButton href={kurs.link} text="Иди на курс" className="mt-auto" />
-        </div>
-        
         ))}
       </div>
     </div>
