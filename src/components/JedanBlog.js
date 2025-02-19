@@ -28,23 +28,18 @@ export const JedanBlog = () => {
 				{blog.naslov}
 			</h1>
 			<div className="mx-auto bg-white shadow-lg rounded-lg p-4">
-				<div className="flex flex-col md:flex-row gap-4">
-					<div className="max-w-full md:max-w-[420px] rounded-lg overflow-hidden flex-shrink-0">
-						<img
-							src={blog.slika}
-							alt={blog.naslov}
-							className="object-cover w-full h-full"
-						/>
-					</div>
-					<div className="flex flex-col">
-						<div className="flex-1">
-							<p className="text-gray-700 text-sm md:text-base">
-								{vratiSadrzaj({ content: blog.opis })}
-							</p>
-						</div>
-					</div>
+				<div className="relative">
+					<img
+						src={blog.slika}
+						alt={blog.naslov}
+						className="w-[160px] md:w-[250px] rounded-lg float-left mr-4 mb-2"
+					/>
+					<p className="text-gray-700 text-sm md:text-base">
+						{vratiSadrzaj({ content: blog.opis })}
+					</p>
 				</div>
 			</div>
 		</div>
+
 	);
 };
