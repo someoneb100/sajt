@@ -7,33 +7,40 @@ import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
 import { MoreButton } from "../components/Buttons";
 
 function Pocetna() {
-	const [activeSemester, setActiveSemester] = useState("letnji");
-
-	useEffect(() => {
-		const initialSeason = vratiSezonu();
-		setActiveSemester(initialSeason);
-	}, []);
-
 	const [obavestenja, setObavestenja] = useState([]);
 		
 	useEffect(() => {
-		const context = require.context("../data/obavestenja", false, /\.json$/);
-		const data = dohvatiSadrzaj(context, true);
-		setObavestenja(data.slice(0, 3));
-	}, []);
+		const fetchObavestenja = async () => {
+		  try {
+			const context = require.context("../data/obavestenja", false, /\.md$/);
+			const data = await dohvatiSadrzaj(context, true, true);
+			setObavestenja(data.slice(0,3));
+		  } catch (error) {
+			console.error("Greška pri učitavanju obaveštenja:", error);
+		  }
+		};
+		fetchObavestenja();
+	  }, []);
 
 	const [kursevi, setKursevi] = useState([]);
 
 	useEffect(() => {
-		// eslint-disable-next-line eqeqeq
-		const context = activeSemester == "letnji" ?
-			require.context(`../data/kursevi/letnji`, false, /\.json$/) :
-			require.context(`../data/kursevi/zimski`, false, /\.json$/) ;
-		const data = dohvatiSadrzaj(context)
-		setKursevi(data);
-	  }, [activeSemester]);
-
-	console.log(obavestenja.length)
+		const fetchCourses = async () => {
+		  try {
+			// eslint-disable-next-line eqeqeq
+			const context = vratiSezonu() == "letnji" ?
+				require.context(`../data/kursevi/letnji`, false, /\.md$/) :
+				require.context(`../data/kursevi/zimski`, false, /\.md$/) ;
+	
+			const data = await dohvatiSadrzaj(context);
+			setKursevi(data);
+		  } catch (error) {
+			console.error("Greška pri učitavanju kurseva:", error);
+		  }
+		};
+	
+		fetchCourses();
+	  }, []);
 
 	return (
 		<>
