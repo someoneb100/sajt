@@ -14,14 +14,13 @@ export const Obavestenja = () => {
   }, []);
 
   const [selectedTag, setSelectedTag] = useState("");
-
   const location = useLocation();
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const tagFromUrl = params.get("selectedTag");
     if (tagFromUrl) {
-      setSelectedTag(tagFromUrl); // Set the selected tag from the URL
+      setSelectedTag(tagFromUrl);
     }
   }, [location]);
 
