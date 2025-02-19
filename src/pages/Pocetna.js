@@ -22,19 +22,16 @@ function Pocetna() {
 		setObavestenja(data);
 	}, []);
 
-	const [sviKursevi, setKursevi] = useState({ letnji: [], zimski: [] });
+	const [kursevi, setKursevi] = useState([]);
 
 	useEffect(() => {
-		const contextLetnji = require.context(`../data/kursevi/letnji`, false, /\.json$/);
-		const contextZimski =  require.context(`../data/kursevi/zimski`, false, /\.json$/);
-	
-		setKursevi({
-		  letnji: dohvatiSadrzaj(contextLetnji),
-		  zimski: dohvatiSadrzaj(contextZimski),
-		});
-	  }, []);
-
-	const kursevi = sviKursevi[activeSemester];
+		// eslint-disable-next-line eqeqeq
+		const context = activeSemester == "letnji" ?
+			require.context(`../data/kursevi/letnji`, false, /\.json$/) :
+			require.context(`../data/kursevi/zimski`, false, /\.json$/) ;
+		const data = dohvatiSadrzaj(context)
+		setKursevi(data);
+	  }, [activeSemester]);
 	
 
 	const lastCourse = kursevi?.[0] ?? null;
