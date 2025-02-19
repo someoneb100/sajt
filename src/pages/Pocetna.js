@@ -60,6 +60,7 @@ function Pocetna() {
 									bg="bela"
 									btnText={"Види више"}
 									btnBorder={false}
+									datum={obavestenja[0].datum}
 									link={`${window.location.origin}/sajt/#/obavestenja/${obavestenja[0].id}`}
 								/>
 							) : (
