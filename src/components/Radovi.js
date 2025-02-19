@@ -6,11 +6,15 @@ import { DownloadButton } from "./Buttons";
 export const Radovi = () => {
 	const [radovi, setRadovi] = useState([]);
 	
-	useEffect(() => {
-		const context = require.context('../data/radovi', false, /\.json$/);
-		const data = dohvatiSadrzaj(context, true);
-		setRadovi(data);
-	}, []);
+	  useEffect(() => {
+		const loadRadovi = async () => {
+		  const context = require.context("../data/radovi", false, /\.md$/);
+		  const data = await dohvatiSadrzaj(context, true);
+		  setRadovi(data);
+		};
+	
+		loadRadovi();
+	  }, []);
 
 	return (
 		<>
