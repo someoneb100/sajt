@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/sajt/static/css/main.35a490ff.css",
-    "main.js": "/sajt/static/js/main.bcc1bade.js",
+    "main.js": "/sajt/static/js/main.b41603cc.js",
     "static/js/453.d6231d07.chunk.js": "/sajt/static/js/453.d6231d07.chunk.js",
     "static/media/profilnaSlika.png": "/sajt/static/media/profilnaSlika.55b17016afe59ee28949.png",
     "index.html": "/sajt/index.html",
     "main.35a490ff.css.map": "/sajt/static/css/main.35a490ff.css.map",
-    "main.bcc1bade.js.map": "/sajt/static/js/main.bcc1bade.js.map",
+    "main.b41603cc.js.map": "/sajt/static/js/main.b41603cc.js.map",
     "453.d6231d07.chunk.js.map": "/sajt/static/js/453.d6231d07.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.35a490ff.css",
-    "static/js/main.bcc1bade.js"
+    "static/js/main.b41603cc.js"
   ]
 }
