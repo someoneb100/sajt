@@ -7,19 +7,13 @@ export const JedanBlog = () => {
 	const [blog, setBlog] = useState(null);
 
 	useEffect(() => {
-		const loadBlog = () => {
-			// Dynamically load the specific blog post based on the id
-			const context = require.context('../data/blogovi', false, /\.json$/);
-			const blogData = context(`./${id}.json`); // Dynamically require the JSON file based on the id
-
-			setBlog(blogData); // Set the blog data state
-		};
-
-		loadBlog();
+		const context = require.context('../data/blogovi', false, /\.json$/);
+		const blogData = context(`./${id}.json`);
+		setBlog(blogData);
 	}, [id]);
 
 	if (!blog) {
-		return <div>Loading...</div>; // Show a loading state until the blog data is loaded
+		return <div>Loading...</div>;
 	}
 
 	return (

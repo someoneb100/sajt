@@ -8,7 +8,6 @@ import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
 
 function Pocetna() {
 	const [activeSemester, setActiveSemester] = useState("letnji");
-	const [sviKursevi, setKursevi] = useState({ letnji: [], zimski: [] });
 
 	useEffect(() => {
 		const initialSeason = vratiSezonu();
@@ -18,10 +17,12 @@ function Pocetna() {
 	const [obavestenja, setObavestenja] = useState([]);
 		
 	useEffect(() => {
-	const context = require.context("../data/obavestenja", false, /\.json$/);
-	const data = dohvatiSadrzaj(context, true);
-	setObavestenja(data);
+		const context = require.context("../data/obavestenja", false, /\.json$/);
+		const data = dohvatiSadrzaj(context, true);
+		setObavestenja(data);
 	}, []);
+
+	const [sviKursevi, setKursevi] = useState({ letnji: [], zimski: [] });
 
 	useEffect(() => {
 		const contextLetnji = require.context(`../data/kursevi/letnji`, false, /\.json$/);

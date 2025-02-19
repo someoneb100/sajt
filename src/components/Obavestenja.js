@@ -6,19 +6,17 @@ import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
 
 export const Obavestenja = () => {
   const [obavestenja, setObavestenja] = useState([]);
-  const [selectedTag, setSelectedTag] = useState("");
 
-  const location = useLocation(); // Get the current URL
-  const navigate = useNavigate(); // For updating the URL
-
-  // This function loads the notifications and applies the query parameters
   useEffect(() => {
     const context = require.context("../data/obavestenja", false, /\.json$/);
     const data = dohvatiSadrzaj(context, true);
     setObavestenja(data);
   }, []);
 
-  // Extract query parameters from the URL
+  const [selectedTag, setSelectedTag] = useState("");
+
+  const location = useLocation();
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const tagFromUrl = params.get("selectedTag");
@@ -31,12 +29,15 @@ export const Obavestenja = () => {
     ...new Set(obavestenja.flatMap((obavestenje) => obavestenje.tagovi)),
   ].sort();
 
+  
+  const navigate = useNavigate();
+
   const handleTagChange = (tag) => {
     setSelectedTag(tag);
-    // Update the URL query parameter when the tag is changed
+    
     navigate({
-      pathname: "/obavestenja", // The current route
-      search: `?selectedTag=${tag}`, // Add the query string
+      pathname: "/obavestenja",
+      search: `?selectedTag=${tag}`,
     });
   };
 

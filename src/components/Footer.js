@@ -1,4 +1,3 @@
-// src/components/Footer.js
 import React from "react";
 import { Title } from "./Title";
 import kontakt from "../data/kontakt.json";

@@ -3,18 +3,17 @@ import { vratiSadrzaj } from "../utils/VratiSadrzaj";
 import { vratiSezonu } from "../utils/VratiSezonu";
 import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
 import { Title } from "./Title";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 
 export const Nastava = () => {
-  const [activeSemester, setActiveSemester] = useState("letnji");
-  const [kursevi, setKursevi] = useState({ letnji: [], zimski: [] });
-  const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate(); // Initialize navigate
+  const [activeSemester, setActiveSemester] = useState("letnji"); 
 
   useEffect(() => {
     const initialSeason = vratiSezonu();
     setActiveSemester(initialSeason);
   }, []);
+
+  const [kursevi, setKursevi] = useState({ letnji: [], zimski: [] });
 
   useEffect(() => {
     const contextLetnji = require.context(`../data/kursevi/letnji`, false, /\.json$/);
@@ -26,10 +25,13 @@ export const Nastava = () => {
     });
   }, []);
 
-  // Function to handle tag click
+  const navigate = useNavigate();
+
   const handleTagClick = (tag) => {
-    navigate(`/obavestenja?selectedTag=${tag}`); // Navigate to the obavestenja page with the selectedTag query parameter
+    navigate(`/obavestenja?selectedTag=${tag}`);
   };
+
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="pr-[15%] pl-[15%] bg-[#F7F8F9] h-[70%] pb-6">

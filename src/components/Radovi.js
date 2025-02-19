@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // Import useState and useEffect here
+import React, { useState, useEffect } from "react";
 import { Title } from "./Title";
 import Preuzmi from "../shared/Preuzmi.png";
 import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
