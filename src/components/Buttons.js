@@ -14,19 +14,18 @@ export const MoreButton = ({text="Види више", href}) => {
     )
 }
 
-export const DownloadButton = ({text="Преузми", href}) => {
+export const DownloadButton = ({ text = "Преузми", href }) => {
     return (
         <a
             href={href}
-            target="_blank"
-            download
-            rel="noopener noreferrer">
-            <button className="bg-white flex gap-x-2 border border-[#22A8C5] text-[#22A8C5] font-semibold text-sm px-4 py-2 rounded-lg shadow-md hover:bg-blue-50">
-                {text} <img src={Preuzmi} alt="download" />
-            </button>
+            className="inline-flex items-center text-[#22A8C5] hover:bg-blue-50 py-2 px-4 text-sm font-medium mt-auto border border-[#22A8C5] rounded-lg shadow-md self-start w-fit"
+        >
+            {text} 
+            <img src={Preuzmi} alt="download" className="ml-2 w-4 h-4" />
         </a>
-    )
-}
+    );
+};
+
 
 export const Tag = ({ text, selectedTag, handleTagChange }) => {
   const navigate = useNavigate();
