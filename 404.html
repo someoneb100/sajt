@@ -5,20 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Преусмеравање...</title>
     <script>
-        // Dobavi trenutni putanju bez "/sajt"
+        // Trying to redirect on hash-based routing
         var pathname = window.location.pathname.replace(/^\/sajt/, "");
-        
-        // Enkodovanje kako bi sprečili probleme sa specijalnim karakterima
-        var redirectUrl = "/sajt/index.html?redirect=" + encodeURIComponent(pathname);
-        
-        // Automatski preusmeri
-        window.location.replace(redirectUrl);
+        var redirectUrl = "/sajt/#" + encodeURIComponent(pathname);
+        window.location.replace(redirectUrl); // This should ideally work in most cases
     </script>
 </head>
 <body>
-    <p>Ако преусмеравање не ради, <a id="redirect-link" href="#">кликните овде</a>.</p>
-    <script>
-        document.getElementById("redirect-link").href = redirectUrl;
-    </script>
+    <p>Ако преусмеравање не ради, <a href="#" onclick="window.location.replace(redirectUrl);">кликните овде</a>.</p>
 </body>
 </html>
