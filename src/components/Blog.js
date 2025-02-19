@@ -7,9 +7,13 @@ export const Blog = () => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    const context = require.context('../data/blogovi', false, /\.json$/); 
-    const blogsData = dohvatiSadrzaj(context, true)
-    setBlogs(blogsData);
+    const loadBlogs = async () => {
+      const context = require.context("../data/blogovi", false, /\.md$/);
+      const blogsData = await dohvatiSadrzaj(context, true);
+      setBlogs(blogsData);
+    };
+
+    loadBlogs();
   }, []);
 
   return (

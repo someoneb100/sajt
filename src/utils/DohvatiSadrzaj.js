@@ -1,40 +1,55 @@
-import {parse, isValid} from "date-fns"
+import matter from "gray-matter";
+import { parse, isValid } from "date-fns";
+import { Buffer } from "buffer";
 
-export function dohvatiSadrzaj(context, sortDate = false, desc = true, extension = '.json'){
-    const data = context.keys().map((path => {
-        const name = path.split('/').pop().replace(extension, '');
-        const data = context(path);
-        return {...data, "id" : name};
-    }))
+window.Buffer = window.Buffer || Buffer;
 
-    if(!sortDate){
+export async function dohvatiSadrzaj(context, sortDate = false, desc = true, extension = ".md") {
+    const paths = context.keys();
+
+    const data = await Promise.all(
+        paths.map(async (path) => {
+            const name = path.split("/").pop().replace(extension, "");
+            const realPath = context(path);
+            const fileContent = await fetch(realPath).then((res) => res.text());
+            const { content, data } = matter(fileContent);
+
+            return { ...data, content: content, id: name };
+        })
+    );
+    console.log(data)
+    if (!sortDate) {
         return data;
     }
 
     const getDate = (date) => {
-      const formats = ["HH:mm dd.MM.yyyy.", "dd.MM.yyyy."];
-  
-      for (const format of formats) {
-          const parsedDate = parse(date, format, new Date());
-          if (isValid(parsedDate)) {
-              return parsedDate;
-          }
-      }
-  
-      return new Date("Invalid");
-  };
+        if (!date) {
+            return new Date("Invalid");
+        }
 
-    const sortedData = data.filter((item) => {
-        const currentDate = new Date();
-        const itemDate = getDate(item.datum);
-        console.log("date: ", itemDate)
-        return itemDate <= currentDate;
-      })
-      .sort((a, b) => {
-        const dateA = getDate(a.datum);
-        const dateB = getDate(b.datum);
-        return desc ? (dateB - dateA) : (dateA - dateB);
-      });
+        const formats = ["HH:mm dd.MM.yyyy.", "dd.MM.yyyy."];
 
-      return sortedData;
+        for (const format of formats) {
+            const parsedDate = parse(date, format, new Date());
+            if (isValid(parsedDate)) {
+                return parsedDate;
+            }
+        }
+
+        return new Date("Invalid");
+    };
+
+    const sortedData = data
+        .filter((item) => {
+            const currentDate = new Date();
+            const itemDate = getDate(item.datum);
+            return itemDate <= currentDate;
+        })
+        .sort((a, b) => {
+            const dateA = getDate(a.datum);
+            const dateB = getDate(b.datum);
+            return desc ? dateB - dateA : dateA - dateB;
+        });
+
+    return sortedData;
 }
