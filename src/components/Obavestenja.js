@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Title } from "./Title";
 import { vratiSadrzaj } from "../utils/VratiSadrzaj";
+import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
 
 export const Obavestenja = () => {
   const [obavestenja, setObavestenja] = useState([]);
@@ -12,30 +13,9 @@ export const Obavestenja = () => {
 
   // This function loads the notifications and applies the query parameters
   useEffect(() => {
-    const loadObavestenja = () => {
-      const context = require.context("../data/obavestenja", false, /\.json$/);
-      const blogFiles = context.keys();
-      const data = blogFiles
-        .map((filePath) => {
-          const fileName = filePath.split("/").pop().replace(".json", "");
-          const data = context(filePath);
-          return { ...data, id: fileName };
-        })
-        .filter((item) => {
-          const currentDate = new Date();
-          const itemDate = new Date(item.datum);
-          return itemDate <= currentDate;
-        })
-        .sort((a, b) => {
-          const dateA = new Date(a.datum);
-          const dateB = new Date(b.datum);
-          return dateB - dateA;
-        });
-
-      setObavestenja(data);
-    };
-
-    loadObavestenja();
+    const context = require.context("../data/obavestenja", false, /\.json$/);
+    const data = dohvatiSadrzaj(context, true);
+    setObavestenja(data);
   }, []);
 
   // Extract query parameters from the URL

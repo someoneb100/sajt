@@ -1,30 +1,16 @@
 import React, { useState, useEffect } from "react"; // Import useState and useEffect here
 import { Title } from "./Title";
 import Preuzmi from "../shared/Preuzmi.png";
+import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
 
 export const Radovi = () => {
 	const [radovi, setRadovi] = useState([]);
 	
-	  useEffect(() => {
-		const loadRadovi= () => {
-		  // Using Webpack's require.context to dynamically import all .json files from the folder
-		  const context = require.context('../data/radovi', false, /\.json$/); // Adjust the path accordingly
-		  const blogFiles = context.keys(); // This will return an array of file paths
-	
-		  // Dynamically require each JSON file
-		  const data = blogFiles.map((filePath) => {
-			const fileName = filePath.split('/').pop().replace('.json', '');
-			const data = context(filePath); // Load the JSON data from the file
-	
-			// Add the 'id' property dynamically based on the file name
-			return { ...data, id: fileName };
-		  });
-	
-		  setRadovi(data); // Update state with the imported JSON files
-		};
-	
-		loadRadovi();
-	  }, []);
+	useEffect(() => {
+		const context = require.context('../data/radovi', false, /\.json$/);
+		const data = dohvatiSadrzaj(context, true);
+		setRadovi(data);
+	}, []);
 
 	return (
 		<>

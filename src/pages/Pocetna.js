@@ -4,6 +4,7 @@ import Profilna from "../shared/profilnaSlika.png";
 import { Title } from "../components/Title";
 import { NavLink } from "react-router-dom";
 import { vratiSezonu } from "../utils/VratiSezonu";
+import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
 
 function Pocetna() {
 	const [activeSemester, setActiveSemester] = useState("letnji");
@@ -17,86 +18,31 @@ function Pocetna() {
 	const [obavestenja, setObavestenja] = useState([]);
 		
 	useEffect(() => {
-		const loadObavestenja= () => {
-			// Using Webpack's require.context to dynamically import all .json files from the folder
-			const context = require.context('../data/obavestenja', false, /\.json$/); // Adjust the path accordingly
-			const blogFiles = context.keys(); // This will return an array of file paths
-
-			// Dynamically require each JSON file
-			const data = blogFiles.map((filePath) => {
-				const fileName = filePath.split('/').pop().replace('.json', '');
-				const data = context(filePath); // Load the JSON data from the file
-
-				// Add the 'id' property dynamically based on the file name
-				return { ...data, id: fileName };
-			}).filter((item) => {
-				const currentDate = new Date(); // Get the current date and time
-				const itemDate = new Date(item.datum); // Convert 'datum' to Date object for comparison
-				return itemDate <= currentDate; // Keep only items with 'datum' <= current date
-			  }).sort((a, b) => {
-				const dateA = new Date(a.datum); // Convert 'datum' to Date object for comparison
-				const dateB = new Date(b.datum); // Convert 'datum' to Date object for comparison
-
-				return dateA - dateB; // Sorting in ascending order (latest last)
-			});
-
-			setObavestenja(data); // Update state with the imported JSON files
-		};
-
-		loadObavestenja();
+	const context = require.context("../data/obavestenja", false, /\.json$/);
+	const data = dohvatiSadrzaj(context, true);
+	setObavestenja(data);
 	}, []);
 
 	useEffect(() => {
-		const loadLetnji = () => {
-			try {
-				const context = require.context(`../data/kursevi/letnji`, false, /\.json$/);
-				return context.keys().map((filePath) => {
-					const fileName = filePath.split('/').pop().replace('.json', '');
-					return { ...context(filePath), id: fileName };
-				});
-			} catch (error) {
-				console.error(`Greška pri učitavanju podataka za letnji:`, error);
-				return [];
-			}
-		};
-
-		const loadZimski = () => {
-			try {
-				const context = require.context(`../data/kursevi/zimski`, false, /\.json$/);
-				return context.keys().map((filePath) => {
-					const fileName = filePath.split('/').pop().replace('.json', '');
-					return { ...context(filePath), id: fileName };
-				});
-			} catch (error) {
-				console.error(`Greška pri učitavanju podataka za zimski:`, error);
-				return [];
-			}
-		};
+		const contextLetnji = require.context(`../data/kursevi/letnji`, false, /\.json$/);
+		const contextZimski =  require.context(`../data/kursevi/zimski`, false, /\.json$/);
 	
 		setKursevi({
-			letnji: loadLetnji(),
-			zimski: loadZimski(),
+		  letnji: dohvatiSadrzaj(contextLetnji),
+		  zimski: dohvatiSadrzaj(contextZimski),
 		});
-	}, []);
+	  }, []);
 
 	const kursevi = sviKursevi[activeSemester];
+	
 
-	// Sigurno dobijanje poslednjeg kursa ili obavestenja
-	const getLastElement = (arr) => {
-		if (arr && arr.length > 0) {
-			return arr[arr.length - 1];
-		}
-		return null; // Vraća null ako nema elemenata
-	};
+	const lastCourse = kursevi?.[0] ?? null;
+	const secondLastCourse = kursevi?.[1] ?? null;
+	const thirdLastCourse = kursevi?.[2] ?? null;
 
-	// Bezbedno uzimanje poslednjih kurseva i obaveštenja
-	const lastCourse = getLastElement(kursevi);
-	const secondLastCourse = kursevi.length > 1 ? kursevi[kursevi.length - 2] : null;
-	const thirdLastCourse = kursevi.length > 2 ? kursevi[kursevi.length - 3] : null;
-
-	const lastObavestenje = getLastElement(obavestenja);
-	const secondLastObavestenje = obavestenja.length > 1 ? obavestenja[obavestenja.length - 2] : null;
-	const thirdLastObavestenje = obavestenja.length > 2 ? obavestenja[obavestenja.length - 3] : null;
+	const lastObavestenje = obavestenja?.[0] ?? null;
+	const secondLastObavestenje = obavestenja?.[1] ?? null;
+	const thirdLastObavestenje = obavestenja?.[2] ?? null;
 
 	return (
 		<>

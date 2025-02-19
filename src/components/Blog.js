@@ -1,38 +1,15 @@
 import React, { useState, useEffect } from "react"; // Import useState and useEffect here
 import { Title } from "./Title";
 import { useNavigate } from "react-router-dom";
+import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
 
 export const Blog = () => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    const loadBlogs = () => {
-      // Using Webpack's require.context to dynamically import all .json files from the folder
-      const context = require.context('../data/blogovi', false, /\.json$/); // Adjust the path accordingly
-      const blogFiles = context.keys(); // This will return an array of file paths
-
-      // Dynamically require each JSON file
-      const blogsData = blogFiles.map((filePath) => {
-        const fileName = filePath.split('/').pop().replace('.json', '');
-        const blogData = context(filePath); // Load the JSON data from the file
-
-        // Add the 'id' property dynamically based on the file name
-        return { ...blogData, id: fileName };
-      }).filter((item) => {
-        const currentDate = new Date();
-        const itemDate = new Date(item.datum);
-        return itemDate <= currentDate;
-      })
-      .sort((a, b) => {
-        const dateA = new Date(a.datum);
-        const dateB = new Date(b.datum);
-        return dateB - dateA;
-      });;
-
-      setBlogs(blogsData); // Update state with the imported JSON files
-    };
-
-    loadBlogs();
+    const context = require.context('../data/blogovi', false, /\.json$/); 
+    const blogsData = dohvatiSadrzaj(context, true)
+    setBlogs(blogsData);
   }, []);
 
   const navigate = useNavigate();

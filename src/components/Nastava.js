@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { vratiSadrzaj } from "../utils/VratiSadrzaj";
 import { vratiSezonu } from "../utils/VratiSezonu";
+import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
 import { Title } from "./Title";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 
@@ -16,35 +17,12 @@ export const Nastava = () => {
   }, []);
 
   useEffect(() => {
-    const loadLetnji = () => {
-      try {
-        const context = require.context(`../data/kursevi/letnji`, false, /\.json$/);
-        return context.keys().map((filePath) => {
-          const fileName = filePath.split('/').pop().replace('.json', '');
-          return { ...context(filePath), id: fileName };
-        });
-      } catch (error) {
-        console.error(`Greška pri učitavanju podataka za letnji:`, error);
-        return [];
-      }
-    };
-
-    const loadZimski = () => {
-      try {
-        const context = require.context(`../data/kursevi/zimski`, false, /\.json$/);
-        return context.keys().map((filePath) => {
-          const fileName = filePath.split('/').pop().replace('.json', '');
-          return { ...context(filePath), id: fileName };
-        });
-      } catch (error) {
-        console.error(`Greška pri učitavanju podataka za zimski:`, error);
-        return [];
-      }
-    };
+    const contextLetnji = require.context(`../data/kursevi/letnji`, false, /\.json$/);
+    const contextZimski =  require.context(`../data/kursevi/zimski`, false, /\.json$/);
 
     setKursevi({
-      letnji: loadLetnji(),
-      zimski: loadZimski(),
+      letnji: dohvatiSadrzaj(contextLetnji),
+      zimski: dohvatiSadrzaj(contextZimski),
     });
   }, []);
 
