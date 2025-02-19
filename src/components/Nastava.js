@@ -3,10 +3,10 @@ import { vratiSadrzaj } from "../utils/VratiSadrzaj";
 import { vratiSezonu } from "../utils/VratiSezonu";
 import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
 import { Title } from "./Title";
-import { useNavigate } from "react-router-dom";
+import { MoreButton, Tag } from "./Buttons";
 
 export const Nastava = () => {
-  const [activeSemester, setActiveSemester] = useState("letnji"); 
+  const [activeSemester, setActiveSemester] = useState("letnji");
 
   useEffect(() => {
     const initialSeason = vratiSezonu();
@@ -17,19 +17,13 @@ export const Nastava = () => {
 
   useEffect(() => {
     const contextLetnji = require.context(`../data/kursevi/letnji`, false, /\.json$/);
-    const contextZimski =  require.context(`../data/kursevi/zimski`, false, /\.json$/);
+    const contextZimski = require.context(`../data/kursevi/zimski`, false, /\.json$/);
 
     setKursevi({
       letnji: dohvatiSadrzaj(contextLetnji),
       zimski: dohvatiSadrzaj(contextZimski),
     });
   }, []);
-
-  const navigate = useNavigate();
-
-  const handleTagClick = (tag) => {
-    navigate(`/obavestenja?selectedTag=${tag}`);
-  };
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -72,22 +66,11 @@ export const Nastava = () => {
               {vratiSadrzaj({ content: kurs.opis })}
             </p>
             <div className="flex space-x-2 mb-4">
-              {kurs.tagovi.map((tag, tagIndex) => (
-                <span
-                  key={tagIndex}
-                  className="bg-gray-200 text-gray-600 text-xs py-1 px-3 rounded-full cursor-pointer"
-                  onClick={() => handleTagClick(tag)} // Make the tag clickable
-                >
-                  {tag}
-                </span>
+              {kurs.tagovi.map((tag) => (
+                <Tag key={tag} text={tag} />
               ))}
             </div>
-            <a
-              href={kurs.link}
-              className="inline-block text-[#22A8C5] border border-[#22A8C5] hover:bg-blue-50 py-2 px-4 rounded-md text-sm font-semibold"
-            >
-              Иди на курс →
-            </a>
+            <MoreButton href={kurs.link} text="Иди на курс" />
           </div>
         ))}
 
@@ -102,14 +85,8 @@ export const Nastava = () => {
                 {vratiSadrzaj({ content: kurs.opis })}
               </p>
               <div className="flex space-x-2 mb-4">
-                {kurs.tagovi.map((tag, tagIndex) => (
-                  <span
-                    key={tagIndex}
-                    className="bg-gray-200 text-gray-600 text-xs py-1 px-3 rounded-full cursor-pointer"
-                    onClick={() => handleTagClick(tag)} // Make the tag clickable
-                  >
-                    {tag}
-                  </span>
+                {kurs.tagovi.map((tag) => (
+                  <Tag key={tag} text={tag} />
                 ))}
               </div>
               <a

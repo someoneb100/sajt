@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Title } from "./Title";
 import { vratiSadrzaj } from "../utils/VratiSadrzaj";
 import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
+import { MoreButton, Tag } from "./Buttons";
 
 export const Obavestenja = () => {
   const [obavestenja, setObavestenja] = useState([]);
+  const [selectedTag, setSelectedTag] = useState("");
 
   useEffect(() => {
     const context = require.context("../data/obavestenja", false, /\.json$/);
@@ -13,7 +15,6 @@ export const Obavestenja = () => {
     setObavestenja(data);
   }, []);
 
-  const [selectedTag, setSelectedTag] = useState("");
   const location = useLocation();
 
   useEffect(() => {
@@ -28,23 +29,11 @@ export const Obavestenja = () => {
     ...new Set(obavestenja.flatMap((obavestenje) => obavestenje.tagovi)),
   ].sort();
 
-  
-  const navigate = useNavigate();
-
-  const handleTagChange = (tag) => {
-    setSelectedTag(tag);
-    
-    navigate({
-      pathname: "/obavestenja",
-      search: `?selectedTag=${tag}`,
-    });
-  };
-
   return (
     <div className="pl-[15%] pr-[15%] bg-[#F7F8F9] pb-12 w-full">
       <Title content={"Обавештења"} />
       <select
-        onChange={(e) => handleTagChange(e.target.value)}
+        onChange={(e) => setSelectedTag(e.target.value)}
         value={selectedTag}
         className="border border-gray-300 rounded-md py-2 px-4 bg-white focus:outline-none min-w-[150px]"
       >
@@ -79,17 +68,12 @@ export const Obavestenja = () => {
               <div>
                 {obavestenje.tagovi.length > 0 &&
                   obavestenje.tagovi.map((tag) => (
-                    <button
-                      key={tag}
-                      onClick={() => handleTagChange(tag)}
-                      className="bg-gray-200 text-gray-600 text-xs py-1 px-3 rounded-full mr-2 hover:bg-gray-300"
-                    >
-                      {tag}
-                    </button>
+                    <Tag key={tag} text={tag} />
                   ))}
                 <p className="text-gray-600 mb-2 leading-relaxed mb-6">
                   {vratiSadrzaj({ content: obavestenje.opis })}
                 </p>
+                <MoreButton href={`/sajt/#/obavestenja/${obavestenje.id}`} />
               </div>
             </div>
           ))}

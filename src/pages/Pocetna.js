@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import ContentCards from "../components/ContentCards";
 import Profilna from "../shared/profilnaSlika.png";
 import { Title } from "../components/Title";
-import { NavLink } from "react-router-dom";
 import { vratiSezonu } from "../utils/VratiSezonu";
 import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
+import { MoreButton } from "../components/Buttons";
 
 function Pocetna() {
 	const [activeSemester, setActiveSemester] = useState("letnji");
@@ -63,9 +63,9 @@ function Pocetna() {
 									naslov={obavestenja[0].naslov}
 									sadrzaj={obavestenja[0].opis}
 									bg="bela"
-									btnText={"Види више →"}
+									btnText={"Види више"}
 									btnBorder={false}
-									link={`${window.location.origin}/obavestenja`}
+									link={`${window.location.origin}/sajt/#/obavestenja/${obavestenja[0].id}`}
 								/>
 							) : (
 								<p>Нема обавештења</p>
@@ -86,12 +86,13 @@ function Pocetna() {
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
 					{lastCourse ? (
 						<ContentCards
-							btnText={"Иди на курс →"}
+							btnText={"Иди на курс"}
 							bg="siva"
 							btnBorder
 							naslov={lastCourse.naslov}
 							sadrzaj={lastCourse.opis}
 							datum={lastCourse.datum}
+							link={lastCourse.link}
 						/>
 					) : (
 						<p>Нема курсева</p>
@@ -99,22 +100,25 @@ function Pocetna() {
 					<div className="flex flex-col gap-y-6">
 						{secondLastCourse && (
 							<ContentCards
-								btnText={"Иди на курс →"}
+								btnText={"Иди на курс"}
 								bg="siva"
 								btnBorder
 								naslov={secondLastCourse.naslov}
 								sadrzaj={secondLastCourse.opis}
 								datum={secondLastCourse.datum}
+								link={secondLastCourse.link}
+
 							/>
 						)}
 						{thirdLastCourse && (
 							<ContentCards
-								btnText={"Иди на курс →"}
+								btnText={"Иди на курс"}
 								bg="siva"
 								btnBorder
 								naslov={thirdLastCourse.naslov}
 								sadrzaj={thirdLastCourse.opis}
 								datum={thirdLastCourse.datum}
+								link={thirdLastCourse.link}
 							/>
 						)}
 					</div>
@@ -123,24 +127,20 @@ function Pocetna() {
 			<div className="px-4 md:px-[15%] bg-[#F7F8F9] pb-12">
 				<div className="flex flex-col md:flex-row items-center md:justify-between p-4 rounded-lg">
 					<Title content={"Обавештења"} />
-					<NavLink
-						to={"/obavestenja"}
-						className="text-[#22A8C5] font-bold border border-[#22A8C5] px-4 py-2 mb-4 md:mb-0 rounded-lg hover:bg-blue-50 flex items-center">
-						Види сва обавештења →
-					</NavLink>
+					<MoreButton href="/obavestenja" text="Види сва обавештења" />
 				</div>
 				<div className="flex flex-col gap-y-6">
 					{obavestenja.map((obavestenje) => 
 						obavestenje && (
 							<ContentCards
 							key={obavestenje.id}
-							btnText={"Види више →"}
+							btnText={"Види више"}
 							btnColorRed
 							datum={obavestenje.datum}
 							naslov={obavestenje.naslov}
 							sadrzaj={obavestenje.opis}
 							bg="bela"
-							link={`/obavestenja`}
+							link={`${window.location.origin}/sajt/#/obavestenja/${obavestenje.id}`}
 							/>
 						)
 					)}

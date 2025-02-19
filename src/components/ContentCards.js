@@ -4,8 +4,8 @@
 //dugme type
 //dugme?
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { vratiSadrzaj } from "../utils/VratiSadrzaj";
+import { MoreButton } from "./Buttons";
 
 function ContentCards({
 	naslov,
@@ -14,7 +14,6 @@ function ContentCards({
 	bg = "white",
 	btnText,
 	datum,
-	btnColorRed = false,
 	link,
 }) {
 	return (
@@ -34,13 +33,7 @@ function ContentCards({
 			<p className="text-gray-600 mb-2 leading-relaxed mb-6">
 				{vratiSadrzaj({ content: sadrzaj })}
 			</p>
-			<NavLink
-				to={link}
-				className={`text-[#22A8C5]   font-bold  py-2 rounded ${
-					btnBorder ? "border border-[#22A8C5]  px-4 hover:bg-blue-50" : ""
-				} ${btnColorRed ? "text-[#C52233]" : "hover:text-[#1B86A0]"}`}>
-				{btnText}
-			</NavLink>
+			<MoreButton href={link} text={btnText} />
 		</div>
 	);
 }

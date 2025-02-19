@@ -1,8 +1,8 @@
 import { vratiSadrzaj } from "../utils/VratiSadrzaj";
 import { Title } from "./Title";
 import biografija from "../data/biografija.json";
-import Preuzmi from "../shared/Preuzmi.png";
 import Porfilna from "../shared/profilnaSlika.png";
+import { DownloadButton } from "./Buttons";
 
 export const Biografija = () => {
 	return (
@@ -20,15 +20,7 @@ export const Biografija = () => {
 					</p>
 				</div>
 				<div className="mt-4 text-right flex justify-center md:justify-end">
-					<a
-						href="/sajt/Petar_Djordjevic_CV.pdf"
-						target="_blank"
-						download
-						rel="noopener noreferrer">
-						<button className="bg-white flex gap-x-2 border border-[#22A8C5] text-[#22A8C5] font-semibold text-sm px-4 py-2 rounded-lg shadow-md hover:bg-blue-50">
-							Преузми радну биографију <img src={Preuzmi} alt="cv" />
-						</button>
-					</a>
+					<DownloadButton href="/sajt/Petar_Djordjevic_CV.pdf" text="Преузми радну биографију" />
 				</div>
 			</div>
 		</div>

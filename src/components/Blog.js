@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Title } from "./Title";
-import { useNavigate } from "react-router-dom";
 import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
+import { MoreButton } from "./Buttons";
 
 export const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -11,8 +11,6 @@ export const Blog = () => {
     const blogsData = dohvatiSadrzaj(context, true)
     setBlogs(blogsData);
   }, []);
-
-  const navigate = useNavigate();
 
   return (
     <div className="px-4 md:pl-[15%] md:pr-[15%] bg-[#F7F8F9] pb-12 w-full">
@@ -38,11 +36,7 @@ export const Blog = () => {
                 <p className="text-sm text-gray-500 mb-3 sm:mb-0">
                   {blog.datum}
                 </p>
-                <button
-                  onClick={() => navigate(`/blog/${blog.id}`)}
-                  className="text-[#22A8C5] text-sm sm:ml-auto font-medium hover:cursor-pointer hover:text-[#1B86A0]">
-                  Видети више →
-                </button>
+                <MoreButton href={`/blog/${blog.id}`} />
               </div>
             </div>
           </div>

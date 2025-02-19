@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Title } from "./Title";
-import Preuzmi from "../shared/Preuzmi.png";
 import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
+import { DownloadButton } from "./Buttons";
 
 export const Radovi = () => {
 	const [radovi, setRadovi] = useState([]);
@@ -27,11 +27,7 @@ export const Radovi = () => {
 									</div>
 									<p className="text-gray-500">{rad.autor}</p>
 									<p className="text-gray-700">{rad.opis}</p>
-									<a href={rad.publicLink} target="_blank" rel="noreferrer" download>
-										<button className="bg-white flex gap-x-2  border border-[#22A8C5] text-[#22A8C5] font-semibold text-sm px-4 py-2 rounded-lg shadow-md hover:bg-blue-50">
-											Преузми рад <img src={Preuzmi} alt={rad.naslov}/>
-										</button>
-									</a>
+									<DownloadButton href={rad.publicLink} text="Преузми рад" />
 								</div>
 							</>
 						);
