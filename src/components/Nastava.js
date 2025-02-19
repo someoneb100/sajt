@@ -55,21 +55,22 @@ export const Nastava = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {kursevi[activeSemester].map((kurs, index) => (
-          <div key={index} className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-red-600 font-semibold text-lg mb-2">
-              {kurs.naslov}
-            </h2>
-            <p className="text-sm text-gray-500 mb-4">{kurs.datum}</p>
-            <p className="text-gray-700 text-sm mb-4 line-clamp-[7] overflow-hidden text-ellipsis">
-              {vratiSadrzaj({ content: kurs.opis })}
-            </p>
-            <div className="flex space-x-2 mb-4">
-              {kurs.tagovi.map((tag) => (
-                <Tag key={tag} text={tag} />
-              ))}
-            </div>
-            <MoreButton href={kurs.link} text="Иди на курс" />
+          <div key={index} className="bg-white rounded-lg shadow p-6 flex flex-col">
+          <h2 className="text-red-600 font-semibold text-lg mb-2">
+            {kurs.naslov}
+          </h2>
+          <p className="text-sm text-gray-500 mb-4">{kurs.datum}</p>
+          <p className="text-gray-700 text-sm mb-4 line-clamp-[7] overflow-hidden text-ellipsis">
+            {vratiSadrzaj({ content: kurs.opis })}
+          </p>
+          <div className="flex space-x-2 mb-4">
+            {kurs.tagovi.map((tag) => (
+              <Tag key={tag} text={tag} />
+            ))}
           </div>
+          <MoreButton href={kurs.link} text="Иди на курс" className="mt-auto" />
+        </div>
+        
         ))}
       </div>
     </div>

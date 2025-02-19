@@ -7,7 +7,7 @@ export const MoreButton = ({text="Види више", href}) => {
     return (
         <a
             href={href}
-            className="inline-block text-[#22A8C5] hover:bg-blue-50 py-2 px-4  text-sm font-medium ml-auto border border-[#22A8C5] rounded-lg shadow-md"
+            className="inline-block text-[#22A8C5] hover:bg-blue-50 py-2 px-4  text-sm font-medium mt-auto border border-[#22A8C5] rounded-lg shadow-md self-start w-fit"
         >
             {text} →
         </a>
