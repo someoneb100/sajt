@@ -8,6 +8,7 @@ import { Nastava } from "./components/Nastava";
 import { Obavestenja } from "./components/Obavestenja";
 import { Blog } from "./components/Blog";
 import { JedanBlog } from "./components/JedanBlog";
+import { JednoObavestenje} from "./components/JednoObavestenje";
 
 function RedirectHandler() {
 	const navigate = useNavigate();
@@ -57,6 +58,7 @@ function App() {
 					<Route path="radovi" element={<Radovi />} />
 					<Route path="blog" element={<Blog />} />
 					<Route path="blog/:id" element={<JedanBlog />} />
+					<Route path="obavestenja/:id" element={< JednoObavestenje />} />
 				</Route>
 			</Routes>
 		</Router>
