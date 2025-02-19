@@ -19,7 +19,7 @@ function Pocetna() {
 	useEffect(() => {
 		const context = require.context("../data/obavestenja", false, /\.json$/);
 		const data = dohvatiSadrzaj(context, true);
-		setObavestenja(data);
+		setObavestenja(data.slice(0, 3));
 	}, []);
 
 	const [kursevi, setKursevi] = useState([]);
@@ -38,9 +38,7 @@ function Pocetna() {
 	const secondLastCourse = kursevi?.[1] ?? null;
 	const thirdLastCourse = kursevi?.[2] ?? null;
 
-	const lastObavestenje = obavestenja?.[0] ?? null;
-	const secondLastObavestenje = obavestenja?.[1] ?? null;
-	const thirdLastObavestenje = obavestenja?.[2] ?? null;
+	console.log(obavestenja.length)
 
 	return (
 		<>
@@ -60,10 +58,10 @@ function Pocetna() {
 						</div>
 						<div className="mt-20 flex flex-col gap-y-2">
 							<p className="text-base font-semibold">Последње новости</p>
-							{lastObavestenje ? (
+							{obavestenja[0] ? (
 								<ContentCards
-									naslov={lastObavestenje.naslov}
-									sadrzaj={lastObavestenje.opis}
+									naslov={obavestenja[0].naslov}
+									sadrzaj={obavestenja[0].opis}
 									bg="bela"
 									btnText={"Види више →"}
 									btnBorder={false}
@@ -132,38 +130,19 @@ function Pocetna() {
 					</NavLink>
 				</div>
 				<div className="flex flex-col gap-y-6">
-					{lastObavestenje && (
-						<ContentCards
+					{obavestenja.map((obavestenje) => 
+						obavestenje && (
+							<ContentCards
+							key={obavestenje.id}
 							btnText={"Види више →"}
 							btnColorRed
-							datum={lastObavestenje.datum}
-							naslov={lastObavestenje.naslov}
-							sadrzaj={lastObavestenje.opis}
+							datum={obavestenje.datum}
+							naslov={obavestenje.naslov}
+							sadrzaj={obavestenje.opis}
 							bg="bela"
 							link={`/obavestenja`}
-						/>
-					)}
-					{secondLastObavestenje && (
-						<ContentCards
-							btnText={"Види више →"}
-							btnColorRed
-							datum={secondLastObavestenje.datum}
-							naslov={secondLastObavestenje.naslov}
-							sadrzaj={secondLastObavestenje.opis}
-							bg="bela"
-							link={`/obavestenja`}
-						/>
-					)}
-					{thirdLastObavestenje && (
-						<ContentCards
-							btnText={"Види више →"}
-							btnColorRed
-							datum={thirdLastObavestenje.datum}
-							naslov={thirdLastObavestenje.naslov}
-							sadrzaj={thirdLastObavestenje.opis}
-							bg="bela"
-							link={`/obavestenja`}
-						/>
+							/>
+						)
 					)}
 				</div>
 			</div>
