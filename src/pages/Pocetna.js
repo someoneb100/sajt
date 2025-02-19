@@ -97,7 +97,7 @@ function Pocetna() {
 			<div className="px-4 md:px-[15%] bg-[#F7F8F9] pb-12">
 				<div className="flex flex-col md:flex-row items-center md:justify-between p-4 rounded-lg">
 					<Title content={"Обавештења"} />
-					<MoreButton href="/obavestenja" text="Види сва обавештења" />
+					<MoreButton href="/sajt/#/obavestenja" text="Види сва обавештења" />
 				</div>
 				<div className="flex flex-col gap-y-6">
 					{obavestenja.map((obavestenje) => 
