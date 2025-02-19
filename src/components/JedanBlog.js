@@ -31,6 +31,8 @@ export const JedanBlog = () => {
 					<p className="text-gray-700 text-sm md:text-base">
 						{vratiSadrzaj({ content: blog.opis })}
 					</p>
+					{/* Invisible spacer to maintain the height of the container */}
+					<div className="clear-both h-0" />
 				</div>
 			</div>
 		</div>
