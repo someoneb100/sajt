@@ -32,11 +32,6 @@ function Pocetna() {
 		const data = dohvatiSadrzaj(context)
 		setKursevi(data);
 	  }, [activeSemester]);
-	
-
-	const lastCourse = kursevi?.[0] ?? null;
-	const secondLastCourse = kursevi?.[1] ?? null;
-	const thirdLastCourse = kursevi?.[2] ?? null;
 
 	console.log(obavestenja.length)
 
@@ -83,45 +78,20 @@ function Pocetna() {
 
 			<div className="bg-white pb-12 px-4 md:px-[15%]">
 				<Title content={"Курсеви"} />
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
-					{lastCourse ? (
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{kursevi.map((kurs) => (
+						<div key={kurs.id} className="h-full">
 						<ContentCards
 							btnText={"Иди на курс"}
 							bg="siva"
 							btnBorder
-							naslov={lastCourse.naslov}
-							sadrzaj={lastCourse.opis}
-							datum={lastCourse.datum}
-							link={lastCourse.link}
+							naslov={kurs.naslov}
+							sadrzaj={kurs.opis}
+							datum={kurs.datum}
+							link={kurs.link}
 						/>
-					) : (
-						<p>Нема курсева</p>
-					)}
-					<div className="flex flex-col gap-y-6">
-						{secondLastCourse && (
-							<ContentCards
-								btnText={"Иди на курс"}
-								bg="siva"
-								btnBorder
-								naslov={secondLastCourse.naslov}
-								sadrzaj={secondLastCourse.opis}
-								datum={secondLastCourse.datum}
-								link={secondLastCourse.link}
-
-							/>
-						)}
-						{thirdLastCourse && (
-							<ContentCards
-								btnText={"Иди на курс"}
-								bg="siva"
-								btnBorder
-								naslov={thirdLastCourse.naslov}
-								sadrzaj={thirdLastCourse.opis}
-								datum={thirdLastCourse.datum}
-								link={thirdLastCourse.link}
-							/>
-						)}
-					</div>
+						</div>
+					))}
 				</div>
 			</div>
 			<div className="px-4 md:px-[15%] bg-[#F7F8F9] pb-12">
