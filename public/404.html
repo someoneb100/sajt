@@ -5,13 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Преусмеравање...</title>
     <script>
-        // Dobavi trenutni putanju bez "/sajt"
         var pathname = window.location.pathname.replace(/^\/sajt/, "");
-        
-        // Enkodovanje kako bi sprečili probleme sa specijalnim karakterima
         var redirectUrl = "/sajt/index.html?redirect=" + encodeURIComponent(pathname);
-        
-        // Automatski preusmeri
         window.location.replace(redirectUrl);
     </script>
 </head>
