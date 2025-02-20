@@ -54,6 +54,15 @@ export const MarkdownRenderer = ({ content }) => {
                         </code>
                     );
                 },
+                ol: ({ node, ...props }) => (
+                    <ol className="list-decimal pl-5 space-y-1" {...props} />
+                ),
+                ul: ({ node, ...props }) => (
+                    <ul className="list-disc pl-5 space-y-1" {...props} />
+                ),
+                li: ({ node, ...props }) => (
+                    <li className="mb-2" {...props} />
+                ),
             }}
         >
             {content}
