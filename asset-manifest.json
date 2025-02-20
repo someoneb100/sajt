@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/sajt/static/css/main.98d84e04.css",
-    "main.js": "/sajt/static/js/main.1d88ef7d.js",
+    "main.js": "/sajt/static/js/main.25fca9f7.js",
     "static/js/453.743e687f.chunk.js": "/sajt/static/js/453.743e687f.chunk.js",
     "static/media/profilnaSlika.png": "/sajt/static/media/profilnaSlika.55b17016afe59ee28949.png",
+    "static/media/react-with-gh-pages.md": "/sajt/static/media/react-with-gh-pages.e340cf47587efacd8d25.md",
     "static/media/0.md": "/sajt/static/media/0.71e68a1e362bbeb66da7.md",
-    "static/media/react-with-gh-pages.md": "/sajt/static/media/react-with-gh-pages.ee5968c197fe7f039645.md",
     "static/media/biografija.md": "/sajt/static/media/biografija.c502652f6767ad8729ed.md",
     "index.html": "/sajt/index.html",
     "static/media/master.md": "/sajt/static/media/master.51da19fa0ad54e662bec.md",
@@ -20,11 +20,11 @@
     "static/media/rs.md": "/sajt/static/media/rs.2cee7abd8a7e2d964881.md",
     "static/media/azrs.md": "/sajt/static/media/azrs.5c28ee04efe4a2ada1df.md",
     "main.98d84e04.css.map": "/sajt/static/css/main.98d84e04.css.map",
-    "main.1d88ef7d.js.map": "/sajt/static/js/main.1d88ef7d.js.map",
+    "main.25fca9f7.js.map": "/sajt/static/js/main.25fca9f7.js.map",
     "453.743e687f.chunk.js.map": "/sajt/static/js/453.743e687f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.98d84e04.css",
-    "static/js/main.1d88ef7d.js"
+    "static/js/main.25fca9f7.js"
   ]
 }
