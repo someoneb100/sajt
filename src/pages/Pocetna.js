@@ -63,7 +63,7 @@ function Pocetna() {
 							{obavestenja[0] ? (
 								<ContentCards
 									naslov={obavestenja[0].naslov}
-									sadrzaj={obavestenja[0].opis}
+									sadrzaj={obavestenja[0].content}
 									bg="bela"
 									btnText={"Види више"}
 									btnBorder={false}
@@ -116,7 +116,7 @@ function Pocetna() {
 							btnColorRed
 							datum={obavestenje.datum}
 							naslov={obavestenje.naslov}
-							sadrzaj={obavestenje.opis}
+							sadrzaj={obavestenje.content}
 							bg="bela"
 							link={`${window.location.origin}/sajt/#/obavestenja/${obavestenje.id}`}
 							/>

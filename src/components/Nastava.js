@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { vratiSadrzaj } from "../utils/VratiSadrzaj";
 import { vratiSezonu } from "../utils/VratiSezonu";
 import { dohvatiSadrzaj } from "../utils/DohvatiSadrzaj";
 import { Title } from "./Title";
 import { MoreButton, Tag } from "./Buttons";
+import { MarkdownRenderer } from "./MarkdownRenderer";
 
 export const Nastava = () => {
   const [activeSemester, setActiveSemester] = useState("letnji");
@@ -67,7 +67,7 @@ export const Nastava = () => {
             </h2>
             <p className="text-sm text-gray-500 mb-4">{kurs.datum}</p>
             <p className="text-gray-700 text-sm mb-4 line-clamp-[7] overflow-hidden text-ellipsis">
-              {vratiSadrzaj({ content: kurs.opis })}
+              <MarkdownRenderer content={kurs.opis} className="flex space-x-2 mb-4" />
             </p>
             <div className="flex space-x-2 mb-4">
               {kurs.tagovi?.map((tag) => (

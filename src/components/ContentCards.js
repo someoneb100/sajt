@@ -1,6 +1,6 @@
 import React from "react";
-import { vratiSadrzaj } from "../utils/VratiSadrzaj";
 import { MoreButton } from "./Buttons";
+import { MarkdownRenderer } from "./MarkdownRenderer";
 
 function ContentCards({
 	naslov,
@@ -21,12 +21,11 @@ function ContentCards({
 					<p className="ml-auto text-[#8C8C8C] text-base">{datum}</p>
 				)}
 			</div>
+			<div className="flex space-x-2 mb-4">
+				<MarkdownRenderer content={sadrzaj} className="flex space-x-2 mb-4" />
+			</div>
 
-			<p className="text-gray-600 mb-2 leading-relaxed flex-1">
-				{typeof sadrzaj === "string" ? vratiSadrzaj({ content: sadrzaj }) : ""}
-			</p>
-
-			<div className="mt-auto">
+			<div className="mt-auto"  >
 				<MoreButton href={link} text={btnText} />
 			</div>
 		</div>
