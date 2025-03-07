@@ -1,10 +1,11 @@
 {
   "files": {
     "main.css": "/sajt/static/css/main.98d84e04.css",
-    "main.js": "/sajt/static/js/main.1aecc719.js",
+    "main.js": "/sajt/static/js/main.87e64d9d.js",
     "static/js/453.743e687f.chunk.js": "/sajt/static/js/453.743e687f.chunk.js",
     "static/media/profilnaSlika.png": "/sajt/static/media/profilnaSlika.55b17016afe59ee28949.png",
     "static/media/react-with-gh-pages.md": "/sajt/static/media/react-with-gh-pages.e340cf47587efacd8d25.md",
+    "static/media/btree-gist.md": "/sajt/static/media/btree-gist.a2054851a01792a73fb5.md",
     "static/media/biografija.md": "/sajt/static/media/biografija.42118be7f92e7a2c214f.md",
     "index.html": "/sajt/index.html",
     "static/media/master.md": "/sajt/static/media/master.51da19fa0ad54e662bec.md",
@@ -15,11 +16,11 @@
     "static/media/azrs.md": "/sajt/static/media/azrs.5c28ee04efe4a2ada1df.md",
     "static/media/0.md": "/sajt/static/media/0.9a45fdd3c1bc64ac4a40.md",
     "main.98d84e04.css.map": "/sajt/static/css/main.98d84e04.css.map",
-    "main.1aecc719.js.map": "/sajt/static/js/main.1aecc719.js.map",
+    "main.87e64d9d.js.map": "/sajt/static/js/main.87e64d9d.js.map",
     "453.743e687f.chunk.js.map": "/sajt/static/js/453.743e687f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.98d84e04.css",
-    "static/js/main.1aecc719.js"
+    "static/js/main.87e64d9d.js"
   ]
 }
