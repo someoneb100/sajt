@@ -34,19 +34,8 @@ export const Nastava = () => {
   return (
     <div className="pr-[15%] pl-[15%] bg-[#F7F8F9] h-[70%] pb-6">
       <Title content={"Настава"} />
-
+        
       <div className="inline-flex gap-x-2 p-1 mb-2 items-center border border-gray-300 rounded-md overflow-hidden">
-        <button
-          onClick={() => setActiveSemester("letnji")}
-          className={`px-4 h-8 text-base font-semibold rounded-lg ${
-            activeSemester === "letnji"
-              ? "bg-red-600 border border-red-600 text-white"
-              : "text-gray-500 border border-gray-200"
-          }`}
-        >
-          Летњи
-        </button>
-        <div className="w-px h-6 bg-gray-300"></div>
         <button
           onClick={() => setActiveSemester("zimski")}
           className={`px-4 h-8 text-base font-semibold rounded-lg ${
@@ -57,6 +46,19 @@ export const Nastava = () => {
         >
           Зимски
         </button>
+        
+        <div className="w-px h-6 bg-gray-300"></div>
+         <button
+          onClick={() => setActiveSemester("letnji")}
+          className={`px-4 h-8 text-base font-semibold rounded-lg ${
+            activeSemester === "letnji"
+              ? "bg-red-600 border border-red-600 text-white"
+              : "text-gray-500 border border-gray-200"
+          }`}
+        >
+          Летњи
+        </button>
+        
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
