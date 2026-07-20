@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/sajt/static/css/main.98d84e04.css",
-    "main.js": "/sajt/static/js/main.0af3b645.js",
+    "main.js": "/sajt/static/js/main.13d3691f.js",
     "static/js/453.743e687f.chunk.js": "/sajt/static/js/453.743e687f.chunk.js",
     "static/media/profilnaSlika.png": "/sajt/static/media/profilnaSlika.55b17016afe59ee28949.png",
     "static/media/react-with-gh-pages.md": "/sajt/static/media/react-with-gh-pages.e340cf47587efacd8d25.md",
@@ -14,14 +14,15 @@
     "static/media/rs.md": "/sajt/static/media/rs.4bf0dec60610806a7b98.md",
     "static/media/azrs.md": "/sajt/static/media/azrs.0d1114abe6b851fbf83f.md",
     "static/media/1.md": "/sajt/static/media/1.b2ba67906f1fbc71f4f1.md",
+    "static/media/3.md": "/sajt/static/media/3.12b1e4a9d9f11a381a91.md",
     "static/media/2.md": "/sajt/static/media/2.18ce45c19ac33b28a5c4.md",
     "static/media/pbp.md": "/sajt/static/media/pbp.f39b1591a3556723b3cb.md",
     "main.98d84e04.css.map": "/sajt/static/css/main.98d84e04.css.map",
-    "main.0af3b645.js.map": "/sajt/static/js/main.0af3b645.js.map",
+    "main.13d3691f.js.map": "/sajt/static/js/main.13d3691f.js.map",
     "453.743e687f.chunk.js.map": "/sajt/static/js/453.743e687f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.98d84e04.css",
-    "static/js/main.0af3b645.js"
+    "static/js/main.13d3691f.js"
   ]
 }
